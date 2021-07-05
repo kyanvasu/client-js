@@ -1,7 +1,7 @@
-import ClientOptions from './types/clientOptions';
-import Auth from './modules/auth';
-import TokenProvider from './core/tokenProvider';
-import HttpClient from 'core/httpClient';
+import TokenProvider from 'core/token-provider';
+import HttpClient from 'core/http-client';
+import Auth from 'modules/auth';
+import ClientOptions from 'types/client-options';
 
 export default class KanvasSDK {
   public readonly tokenProvider: TokenProvider;
@@ -9,7 +9,7 @@ export default class KanvasSDK {
   public readonly http: HttpClient;
 
   constructor(options: ClientOptions) {
-    this.tokenProvider = new TokenProvider(options.domain);
+    this.tokenProvider = new TokenProvider(options);
     this.http = new HttpClient(options, this.tokenProvider);
     this.auth = new Auth(this.http, this.tokenProvider);
   }

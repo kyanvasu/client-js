@@ -1,14 +1,17 @@
 {
   // see https://www.typescriptlang.org/tsconfig to better understand tsconfigs
   "include": ["src", "types"],
-  "exclude": ["test/*", "node_modules/*"],
+  "exclude": ["test", "node_modules"],
   "compilerOptions": {
     "target": "ES2017",
     "module": "ES6",
     "lib": ["dom", "esnext"],
     "baseUrl": "src",
     "paths": {
-      "core/*": ["core/*"]
+      "core/*": ["core/*"],
+      "modules/*": ["modules/*"],
+      "types/*": ["types/*"],
+      "errors/*": ["errors/*"]
     },
     "importHelpers": true,
     // output .d.ts declaration files for consumers

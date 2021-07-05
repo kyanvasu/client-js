@@ -3,7 +3,9 @@ export interface ClientOptions {
   baseUrl: string;
   headers?: Record<string, string>;
   domain?: string;
-  cookies?: boolean;
+  storage?: Storage;
+  tokenKey?: string;
+  refreshTokenKey?: string;
 }
 
 export default ClientOptions;

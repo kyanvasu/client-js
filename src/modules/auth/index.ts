@@ -1,7 +1,7 @@
-import HttpClient from 'core/httpClient';
-import TokenProvider from 'core/tokenProvider';
-import Base from '../../modules/base';
-import LoginResponse from '../../types/login-response.interface';
+import HttpClient from 'core/http-client';
+import TokenProvider from 'core/token-provider';
+import Base from 'modules/base';
+import LoginResponse from 'types/login-response.interface';
 
 type AuthEvents = {
   loggedIn: (data: LoginResponse) => void;

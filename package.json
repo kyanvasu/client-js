@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "tsdx watch",
-    "build": "rm -rf dist && tsc -p .",
+    "build": "npm test && rm -rf dist && tsc -p .",
     "test": "tsdx test",
     "lint": "eslint",
     "size": "size-limit",

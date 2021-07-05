@@ -1,5 +1,5 @@
 import { EventEmitter, DefaultEventMap } from 'tsee';
-import HttpClient from "core/httpClient";
+import HttpClient from "core/http-client";
 
 export default class Base<T extends DefaultEventMap> extends EventEmitter<T> {
   http: HttpClient;

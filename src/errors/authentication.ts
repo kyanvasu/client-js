@@ -1,10 +1,12 @@
 import { AxiosError } from "axios";
-import HttpError from "../types/httpError";
+import HttpError from "types/http-error.type";
 
 class AuthenticationError extends Error {
   readonly errors: HttpError;
   readonly code: string | undefined;
   readonly original: AxiosError;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  readonly message: any;
 
   constructor(error: AxiosError) {
     super();
