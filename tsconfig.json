@@ -1,11 +1,18 @@
 {
   // see https://www.typescriptlang.org/tsconfig to better understand tsconfigs
   "include": ["src", "types"],
-  "exclude": ["**/test/*"],
+  "exclude": ["test", "node_modules"],
   "compilerOptions": {
     "target": "ES2017",
     "module": "ES6",
     "lib": ["dom", "esnext"],
+    "baseUrl": "src",
+    "paths": {
+      "core/*": ["core/*"],
+      "modules/*": ["modules/*"],
+      "types/*": ["types/*"],
+      "errors/*": ["errors/*"]
+    },
     "importHelpers": true,
     // output .d.ts declaration files for consumers
     "declaration": true,
@@ -32,5 +39,13 @@
     "skipLibCheck": true,
     // error out if import and file system have a casing mismatch. Recommended by TS
     "forceConsistentCasingInFileNames": true,
+    // Note: In order to transform *both* js and d.ts files, you need to add both of the below lines to plugins
+    "plugins": [
+      // Transform paths in output .js files
+      { "transform": "typescript-transform-paths" },
+
+      // Transform paths in output .d.ts files (Include this line if you output declarations files)
+      { "transform": "typescript-transform-paths", "afterDeclarations": true }
+    ]
   }
 }
