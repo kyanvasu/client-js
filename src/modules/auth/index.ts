@@ -1,26 +1,44 @@
-// import axios from 'axios';
-// import createAuthRefreshInterceptor from 'axios-auth-refresh';
+import HttpClient from 'core/httpClient';
+import TokenProvider from 'core/tokenProvider';
+import Base from '../../modules/base';
+import LoginResponse from '../../types/login-response.interface';
 
-// export default class Auth {
-//   refreshAuthLogic(failedRequest: object): object {
-//   //   createAuthRefreshInterceptor(axios, refreshAuthLogic);
-    
-//   //   return axios({
-//   //     method: "POST",
-//   //     url: "/refresh-token",
-//   //     data: {
-//   //       // eslint-disable-next-line @typescript-eslint/camelcase
-//   //       access_token: '',
-//   //       // eslint-disable-next-line @typescript-eslint/camelcase
-//   //       refresh_token: ''
-//   //     }
-//   //   }).then(tokenRefreshResponse => {
-//   //     // store.dispatch("User/setToken", tokenRefreshResponse.data.token);
-//   //     // store.dispatch("User/setRefreshToken", tokenRefreshResponse.data.refresh_token);
-//   //     failedRequest.response.config.headers.Authorization = tokenRefreshResponse.data.token;
-//   //     return Promise.resolve();
-//   //   });
-//   // }
-// }
+type AuthEvents = {
+  loggedIn: (data: LoginResponse) => void;
+  loggedOut: () => void;
+};
 
-export default class Auth {}
+export default class Auth extends Base<AuthEvents> {
+  tokenProvider: TokenProvider;
+
+  constructor(http: HttpClient, tokenProvider: TokenProvider) {
+    super(http);
+    this.tokenProvider = tokenProvider;
+  }
+
+  async login(email: string, password: string): Promise<LoginResponse> {
+    const { data } = await this.http.request<LoginResponse>({
+      url: '/auth',
+      method: 'POST',
+      data: {
+        email,
+        password
+      }
+    });
+
+    this.tokenProvider.setToken(data.token);
+    this.emit('loggedIn', data);
+
+    return data;
+  }
+
+  async logout(): Promise<void> {
+    await this.http.request({
+      url: 'auth/logout',
+      method: 'PUT',
+    });
+
+    this.tokenProvider.removeToken();
+    this.emit('loggedOut');
+  }
+}

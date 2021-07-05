@@ -1,8 +1,9 @@
-type ClientOptions = {
-  readonly endpoint: string;
-  readonly appKey: string;
-  readonly domain?: string;
-  readonly cookies?: boolean;
-};
+export interface ClientOptions {
+  appKey: string;
+  baseUrl: string;
+  headers?: Record<string, string>;
+  domain?: string;
+  cookies?: boolean;
+}
 
 export default ClientOptions;
