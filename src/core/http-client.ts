@@ -5,10 +5,21 @@ import AuthenticationError from 'errors/authentication';
 import ClientOptions from 'types/client-options';
 import TokenProvider from './token-provider';
 
+/**
+ * @description Interface for REST API requests.
+ *
+ * @export
+ * @class HttpClient
+ */
 export default class HttpClient {
   readonly http: AxiosInstance;
   readonly tokenProvider: TokenProvider;
 
+  /**
+   * Creates an instance of HttpClient.
+   * @param {ClientOptions} options
+   * @param {TokenProvider} tokenProvider
+   */
   constructor(options: ClientOptions, tokenProvider: TokenProvider) {
     this.http = axios.create({
       baseURL: options.baseUrl,
@@ -43,6 +54,10 @@ export default class HttpClient {
     }));
   }
 
+  /**
+   * @param {AxiosError} error
+   * @return {Error} - Returns error type base on API HTTP Status Code response.
+   */
   private handleErrors(error: AxiosError): Error {
     switch(error.response?.status) {
       case HttpErrors.Unauthorized:
@@ -55,18 +70,28 @@ export default class HttpClient {
     }
   }
 
-  request<T>(config: AxiosRequestConfig, isAuthorized = true): Promise<AxiosResponse<T>> {
+  /**
+   * @param {AxiosRequestConfig} config
+   * @param {boolean} [isAuthorized=true]
+   * @return {Promise<AxiosResponse<T>>} - Returns response type based on provided generic type.
+   */
+  request<T>(config: AxiosRequestConfig, isAuthorized: boolean = true): Promise<AxiosResponse<T>> {
     const requestConfig = this.getRequestConfig(config, isAuthorized);
     
     return this.http.request<T>(requestConfig);
   }
 
-  getRequestConfig(
-    config: AxiosRequestConfig,
-    isAuthorized: boolean
-  ): AxiosRequestConfig {
+  /**
+   * @description Returns axios configuration with optional authentication header.
+   *
+   * @param {AxiosRequestConfig} config
+   * @param {boolean} isAuthorized
+   * @return {AxiosRequestConfig}
+   */
+  getRequestConfig(config: AxiosRequestConfig, isAuthorized: boolean): AxiosRequestConfig {
     if (isAuthorized) {
-      const token = this.tokenProvider?.getToken();
+      // Add required authorization tokens to the request.
+      const token = this.tokenProvider.getToken();
       const userHeaders = config.headers || {};
       const headers = {
         Authorization: token
