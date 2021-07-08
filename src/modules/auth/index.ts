@@ -69,6 +69,13 @@ export default class Auth extends Base {
     });
   }
 
+  /**
+   * @description Send reset password request to API.
+   *
+   * @param {string} newPassword
+   * @param {string} verifyPassword
+   * @param {string} code
+   */
   async resetPassword(newPassword: string, verifyPassword: string, code: string): Promise<void> {
     await this.http.request({
       url: `/auth/reset/${code}`,
