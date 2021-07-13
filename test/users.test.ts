@@ -4,7 +4,7 @@ import IUser from '../src/types/user.interface';
 
 const client = new KanvasSDK(Config);
 
-const email = 'demo5-sdk-client@mctekk.com';
+const email = `demo-client-sdk-${Date.now()}@mctekk.com`;
 const password = 'N0s3N0s3';
 const confirmPassword = 'N0s3N0s3'
 let createdUser: IUser;
@@ -25,7 +25,7 @@ describe('Performs Users module Test', () => {
       const { errors: { message } } = await client.users.create(email, password, 'missing').catch(error => error);
       expect(message).toEqual('New password and confirmation do not match.');
     });
-    test('Create an user using email and password', async () => {
+    test(`Create an user using email and password (${email})`, async () => {
       const newUser = await client.users.create(email, password, confirmPassword)
       createdUser = newUser;
       expect(newUser.id).toBeDefined();
@@ -74,6 +74,13 @@ describe('Performs Users module Test', () => {
       expect(data.length).toBeGreaterThanOrEqual(0);
     })
   })
+
+  // describe('Testing Delete user', () => {
+  //   test(`Deleting user ${email}`, async () => {
+  //     const deleted = await client.users.delete(createdUser.id);
+  //     expect(Number(deleted.id)).toBe(createdUser.id);
+  //   })
+  // })
 
 
  
