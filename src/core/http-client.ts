@@ -67,6 +67,9 @@ export default class HttpClient {
       // Remove this
       case HttpErrors.NotFound:
         return new AuthenticationError(error);
+      // Remove this
+      case HttpErrors.UnprocessableEntity:
+        return new AuthenticationError(error);
       default:
         return new Error(error.message);
     }
