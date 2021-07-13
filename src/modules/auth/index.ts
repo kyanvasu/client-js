@@ -53,4 +53,39 @@ export default class Auth extends Base {
     // Remove token and refresh token if request was successful.
     this.tokenProvider.removeTokens();
   }
+
+  /**
+   * @description Send forgot password request to API.
+   *
+   * @param {string} email
+   */
+  async forgotPassword(email: string): Promise<void> {
+    await this.http.request({
+      url: '/auth/forgot',
+      method: 'POST',
+      data: {
+        email
+      }
+    });
+  }
+
+  /**
+   * @description Send reset password request to API.
+   *
+   * @param {string} newPassword
+   * @param {string} verifyPassword
+   * @param {string} code
+   */
+  async resetPassword(newPassword: string, verifyPassword: string, code: string): Promise<void> {
+    await this.http.request({
+      url: `/auth/reset/${code}`,
+      method: 'POST',
+      data: {
+        // eslint-disable-next-line @typescript-eslint/camelcase
+        new_password: newPassword,
+        // eslint-disable-next-line @typescript-eslint/camelcase
+        verify_password: verifyPassword
+      }
+    });
+  }
 }

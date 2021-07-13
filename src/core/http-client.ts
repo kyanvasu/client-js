@@ -14,6 +14,7 @@ import TokenProvider from './token-provider';
 export default class HttpClient {
   readonly http: AxiosInstance;
   readonly tokenProvider: TokenProvider;
+  readonly options: ClientOptions;
 
   /**
    * Creates an instance of HttpClient.
@@ -27,6 +28,7 @@ export default class HttpClient {
     this.setupRefreshInterceptor();
     this.setupResponseInterceptors();
     this.tokenProvider = tokenProvider;
+    this.options = options;
   }
 
   setupResponseInterceptors(): void {
