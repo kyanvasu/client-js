@@ -1,9 +1,8 @@
+import Config from '../env';
 import KanvasSDK from '../src/index';
 
-const client = new KanvasSDK({
-  appKey: '7d0488b2-632e-4045-9d2d-370d9161644a',
-  baseUrl: 'https://crmdev.api.dealerappcenter.com/v2'
-});
+const client = new KanvasSDK(Config);
+
 
 describe('check auth works', () => {
   test('can log in', async() => {
