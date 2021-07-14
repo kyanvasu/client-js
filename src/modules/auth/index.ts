@@ -10,7 +10,8 @@ import LoginResponse from 'types/login-response.interface';
  * @extends {Base}
  */
 export default class Auth extends Base {
-  tokenProvider: TokenProvider;
+  private tokenProvider: TokenProvider;
+  private baseUrl = '/auth';
 
   constructor(http: HttpClient, tokenProvider: TokenProvider) {
     super(http);
@@ -26,7 +27,7 @@ export default class Auth extends Base {
    */
   async login(email: string, password: string): Promise<LoginResponse> {
     const { data } = await this.http.request<LoginResponse>({
-      url: '/auth',
+      url: this.baseUrl,
       method: 'POST',
       data: {
         email,
@@ -46,7 +47,7 @@ export default class Auth extends Base {
    */
   async logout(): Promise<void> {
     await this.http.request({
-      url: 'auth/logout',
+      url: `${this.baseUrl}/logout`,
       method: 'PUT',
     });
 
@@ -61,7 +62,7 @@ export default class Auth extends Base {
    */
   async forgotPassword(email: string): Promise<void> {
     await this.http.request({
-      url: '/auth/forgot',
+      url: `${this.baseUrl}/forgot`,
       method: 'POST',
       data: {
         email
@@ -78,7 +79,7 @@ export default class Auth extends Base {
    */
   async resetPassword(newPassword: string, verifyPassword: string, code: string): Promise<void> {
     await this.http.request({
-      url: `/auth/reset/${code}`,
+      url: `${this.baseUrl}/reset/${code}`,
       method: 'POST',
       data: {
         // eslint-disable-next-line @typescript-eslint/camelcase
