@@ -11,10 +11,9 @@ import LoginResponse from 'types/login-response.interface';
  */
 export default class Auth extends Base {
   private tokenProvider: TokenProvider;
-  private baseUrl = '/auth';
 
   constructor(http: HttpClient, tokenProvider: TokenProvider) {
-    super(http);
+    super(http, '/auth');
     this.tokenProvider = tokenProvider;
   }
 
