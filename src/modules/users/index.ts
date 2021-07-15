@@ -109,7 +109,7 @@ export default class Users extends Base {
    * @param {number} userId 
    * @returns {Promise<UserInterface>} - Deleted user
    */
-  async delete(userId: number): Promise<UserInterface> {
+  async remove(userId: number): Promise<UserInterface> {
     const { data } = await this.http.request<UserInterface>({
       method: 'DELETE',
       url: `${this.baseUrl}/${userId}`,
