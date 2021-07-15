@@ -18,11 +18,8 @@ interface CreatedUsed {
  * @description Kanvas Users Module
  */
 export default class Users extends Base {
-  private baseUrl: string
-
   constructor(http: HttpClient) {
-    super(http);
-    this.baseUrl = '/users';
+    super(http, '/users');
   }
 
   /**
