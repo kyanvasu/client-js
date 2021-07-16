@@ -4,7 +4,7 @@ import IUser from '../src/types/user.interface';
 
 const client = new KanvasSDK(Config);
 
-const email = `demo-client-sdk-${Date.now()}@mctekk.com`;
+const email = `demo-client-js-${Date.now()}@mctekk.com`;
 const password = 'N0s3N0s3';
 const confirmPassword = 'N0s3N0s3'
 let createdUser: IUser;
@@ -85,4 +85,3 @@ describe('Performs Users module Test', () => {
 
  
 })
-
