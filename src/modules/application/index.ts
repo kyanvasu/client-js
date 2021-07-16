@@ -11,7 +11,7 @@ import ApplicationSettings from 'types/application-settings';
  */
 export default class Application extends Base {
   constructor(http: HttpClient) {
-    super(http);
+    super(http, '/apps');
   }
 
   /**
@@ -21,7 +21,7 @@ export default class Application extends Base {
    */
   async getSettings(): Promise<ApplicationSettings> {
     const { data } = await this.http.request<ApplicationSettings>({
-      url: `/apps/${this.http.options.appKey}/settings`
+      url: `${this.baseUrl}/${this.http.options.appKey}/settings`
     }, false);
 
     // We need to overwrite variables from the API response into the correct expected data type.
