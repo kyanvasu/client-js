@@ -1,6 +1,6 @@
 {
-  "**/*.ts": [
-	"eslint",
-	"tsc --noEmit"
+  "src/**/*.ts": [
+	  "eslint",
+	  "tsc --noEmit"
   ]
 }
