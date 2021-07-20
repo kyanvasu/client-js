@@ -7,12 +7,9 @@
  */
 import Base from 'modules/base';
 import HttpClient from 'core/http-client';
-import UserInterface from 'types/user.interface';
+import { UserInterface } from 'types/user.interface';
 import { KanvasFormatedResponse } from 'types/kanvas-formated-response.interface';
 import { PaginationArgument, DEFAULT_PAGINATION_ARGUMENT } from 'types/pagination-argument';
-interface CreatedUsed {
-  user: UserInterface;
-}
 
 /**
  * @description Kanvas Users Module
@@ -20,27 +17,6 @@ interface CreatedUsed {
 export default class Users extends Base {
   constructor(http: HttpClient) {
     super(http, '/users');
-  }
-
-  /**
-   * @description Creates a user (signUp) using email and password
-   * @param {string} email 
-   * @param {string} password 
-   * @param {string} confirmPassword 
-   * @returns {Promise<UserInterface>} - New created user
-   */
-  async create(email: string, password: string, confirmPassword: string): Promise<UserInterface> {
-    const { data } = await this.http.request<CreatedUsed>({
-      method: 'POST',
-      url: this.baseUrl,
-      data: {
-        email,
-        password,
-        verify_password: confirmPassword,
-      }
-    });
-
-    return data.user;
   }
 
   /**
