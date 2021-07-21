@@ -71,7 +71,7 @@ describe('Performs Users module Test', () => {
 
   describe('Testing Get users', () => {
     test('Test get user by id', async () => {
-      const user = await client.users.getById(createdUser.id);
+      const user = await client.users.getById<UserInterface>(createdUser.id);
       expect(Number(user.id)).toEqual(Number(createdUser.id));
       expect(user.displayname).toEqual(createdUser.displayname);
       expect(user.email).toEqual(createdUser.email);
