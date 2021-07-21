@@ -95,7 +95,7 @@ describe('Performs Users module Test', () => {
 
   // describe('Testing Delete user', () => {
   //   test(`Deleting user ${email}`, async () => {
-  //     const deleted = await client.users.delete(createdUser.id);
+  //     const deleted = await client.users.delete<UserInterface>(createdUser.id);
   //     expect(Number(deleted.id)).toBe(createdUser.id);
   //   })
   // })
