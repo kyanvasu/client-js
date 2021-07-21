@@ -49,18 +49,4 @@ export default class Users extends Base {
     });
     return data;
   }
-
-  /**
-   * @description Delete an user by its ID
-   * @param {number} userId 
-   * @returns {Promise<UserInterface>} - Deleted user
-   */
-  async remove(userId: number): Promise<UserInterface> {
-    const { data } = await this.http.request<UserInterface>({
-      method: 'DELETE',
-      url: `${this.baseUrl}/${userId}`,
-    });
-
-    return data;
-  }
 }
