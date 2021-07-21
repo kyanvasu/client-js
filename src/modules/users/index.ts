@@ -20,22 +20,6 @@ export default class Users extends Base {
   }
 
   /**
-   * @description Updates a user by its Id (Differencial update)
-   * @param {number} userId - User Id to perform the update
-   * @param {UserInterface} user - An user object with the update changes to perform to the user
-   * @returns {Promise<UserInterface>} - Updated user object
-   */
-  async update(userId: number, user: UserInterface): Promise<UserInterface> {
-    const { data } = await this.http.request<UserInterface>({
-      method: 'PUT',
-      url: `${this.baseUrl}/${userId}`,
-      data: user,
-    });
-
-    return data;
-  }
-
-  /**
    * @description Get a list of users
    * @returns {Promise<UserInterface[]>}
    */
