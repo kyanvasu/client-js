@@ -51,20 +51,6 @@ export default class Users extends Base {
   }
 
   /**
-   * @description Get an user by its ID
-   * @param {number} userId 
-   * @returns {Promise<UserInterface>}
-   */
-  async getById(userId: number): Promise<UserInterface> {
-    const { data } = await this.http.request<UserInterface>({
-      method: 'GET',
-      url: `${this.baseUrl}/${userId}`,
-    });
-
-    return data;
-  }
-
-  /**
    * @description Delete an user by its ID
    * @param {number} userId 
    * @returns {Promise<UserInterface>} - Deleted user
