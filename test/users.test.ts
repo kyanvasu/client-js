@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import Config from '../env';
 import KanvasSDK from '../src/index';
-import { UserInterface, CreateUserParams, CreatedUser } from '../src/types/user.interface';
+import { UserInterface } from '../src/types/user.interface';
 
 const client = new KanvasSDK(Config);
 
@@ -13,7 +13,7 @@ let createdUser: UserInterface;
 describe('Performs Users module Test', () => {
   describe('Testing user creation', () => {
     test('User cant be created with blank email', async() => {
-      const { errors: { data } } = await client.users.create<CreatedUser, CreateUserParams>({
+      const { errors: { data } } = await client.users.create({
         email:'',
         password,
         verify_password: confirmPassword
@@ -22,7 +22,7 @@ describe('Performs Users module Test', () => {
       expect(error.email[0]).toEqual('The email field is required.');
     });
     test('User cant be created with blank passwords', async() => {
-      const { errors: { data } } = await client.users.create<CreatedUser, CreateUserParams>({
+      const { errors: { data } } = await client.users.create({
         email,
         password: '',
         verify_password: ''
@@ -31,7 +31,7 @@ describe('Performs Users module Test', () => {
       expect(error.password[0]).toEqual('The password field is required.');
     });
     test('User cant be created with mismatching password', async() => {
-      const { errors: { message } } = await client.users.create<CreatedUser, CreateUserParams>({
+      const { errors: { message } } = await client.users.create({
         email,
         password,
         verify_password: 'missing'
@@ -39,12 +39,12 @@ describe('Performs Users module Test', () => {
       expect(message).toEqual('New password and confirmation do not match.');
     });
     test(`Create an user using email and password`, async () => {
-      const newUser = await client.users.create<CreatedUser, CreateUserParams>({
+      const newUser = await client.users.create({
         email,
         password,
         verify_password: confirmPassword
       })
-      createdUser = newUser.user;
+      createdUser = newUser;
       
       expect(createdUser.id).toBeDefined();
     });
@@ -62,7 +62,7 @@ describe('Performs Users module Test', () => {
       const lastname = 'SDK CLIENT';
       const displayname = 'kvsClientSDK';
       expect(createdUser.lastname).toEqual('User');
-      const updatedUser = await client.users.update<UserInterface>(createdUser.id, { ...createdUser, lastname, displayname })
+      const updatedUser = await client.users.update(createdUser.id, { ...createdUser, lastname, displayname })
       expect(updatedUser.lastname).toEqual(lastname);
       expect(updatedUser.displayname).toEqual(displayname);
       createdUser = updatedUser;
@@ -71,14 +71,14 @@ describe('Performs Users module Test', () => {
 
   describe('Testing Get users', () => {
     test('Test get user by id', async () => {
-      const user = await client.users.getById<UserInterface>(createdUser.id);
+      const user = await client.users.getById(createdUser.id);
       expect(Number(user.id)).toEqual(Number(createdUser.id));
       expect(user.displayname).toEqual(createdUser.displayname);
       expect(user.email).toEqual(createdUser.email);
     })
 
     test('Get users list', async () => {
-      const users = await client.users.get();
+      const users = await client.users.get()
       expect(users).toBeInstanceOf(Array);
       const [first] = users;
       expect(first.id).toBeDefined();
