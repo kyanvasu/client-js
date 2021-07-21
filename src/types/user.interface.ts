@@ -60,12 +60,8 @@ export interface UserInterface {
   locale: string;
   roles: string;
   states: string;
-}
-
-export interface CreateUserParams {
-  email: string;
-  password: string;
-  verify_password: string;
+  password?: string;
+  verify_password?: string;
 }
 
 export interface CreatedUser {
