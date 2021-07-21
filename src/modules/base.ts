@@ -45,13 +45,27 @@ export default class Base {
   }
 
   /**
-   * @description Get an record by its ID
+   * @description Get an record by its ID.
    * @param {number} id 
    * @returns {Promise<T>}
    */
   async getById<T>(id: number): Promise<T> {
     const { data } = await this.http.request<T>({
       method: 'GET',
+      url: `${this.baseUrl}/${id}`,
+    });
+
+    return data;
+  }
+
+  /**
+   * @description Delete an record by its ID.
+   * @param {number} id 
+   * @returns {Promise<T>} - Deleted record.
+   */
+  async remove<T>(id: number): Promise<T> {
+    const { data } = await this.http.request<T>({
+      method: 'DELETE',
       url: `${this.baseUrl}/${id}`,
     });
 
