@@ -1,4 +1,4 @@
-import HttpClient from "core/http-client";
+import HttpClient from 'core/http-client';
 
 export default class Base {
   protected readonly http: HttpClient;
