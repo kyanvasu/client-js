@@ -14,7 +14,7 @@ export default class Base {
   }
 
   /**
-   * @description Create a record for an entity (based defined baseUrl by child).
+   * @description Create a record.
    * @param {<K>} postData - Data to be posted for creating the record.
    * @returns {Promise<T>} - Newly created record.
    */
@@ -23,6 +23,22 @@ export default class Base {
       method: 'POST',
       url: this.baseUrl,
       data: postData
+    });
+
+    return data;
+  }
+
+  /**
+   * @description Updates a record by its ID (differencial update).
+   * @param {number} id - ID to perform the update.
+   * @param {K} putData - An object with the update changes to perform to the record.
+   * @returns {Promise<T>} - Updated record.
+   */
+  async update<T>(id: number, putData: T): Promise<T> {
+    const { data } = await this.http.request<T>({
+      method: 'PUT',
+      url: `${this.baseUrl}/${id}`,
+      data: putData,
     });
 
     return data;
