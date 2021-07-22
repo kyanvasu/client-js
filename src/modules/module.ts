@@ -25,11 +25,11 @@ export default class Module<T> extends Base {
 
   /**
    * @description Updates a record by its ID (differencial update).
-   * @param {number} id - ID to perform the update.
+   * @param {number|string} id - ID to perform the update.
    * @param {K} putData - An object with the update changes to perform to the record.
    * @returns {Promise<T>} - Updated record.
    */
-  async update(id: number, putData: T): Promise<T> {
+  async update(id: number | string, putData: T): Promise<T> {
     const { data } = await this.http.request<T>({
       method: 'PUT',
       url: `${this.baseUrl}/${id}`,
@@ -72,10 +72,10 @@ export default class Module<T> extends Base {
 
   /**
    * @description Get an record by its ID.
-   * @param {number} id 
+   * @param {number|string} id 
    * @returns {Promise<T>}
    */
-  async getById(id: number): Promise<T> {
+  async getById(id: number | string): Promise<T> {
     const { data } = await this.http.request<T>({
       method: 'GET',
       url: `${this.baseUrl}/${id}`,
@@ -86,10 +86,10 @@ export default class Module<T> extends Base {
 
   /**
    * @description Delete an record by its ID.
-   * @param {number} id 
+   * @param {number|string} id 
    * @returns {Promise<T>} - Deleted record.
    */
-  async remove(id: number): Promise<T> {
+  async remove(id: number | string): Promise<T> {
     const { data } = await this.http.request<T>({
       method: 'DELETE',
       url: `${this.baseUrl}/${id}`,
