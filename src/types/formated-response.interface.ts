@@ -1,4 +1,4 @@
-export interface KanvasFormatedResponse<T> {
+export interface FormatedResponse<T> {
   data: T[];
   limit: number;
   page: number;

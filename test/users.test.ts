@@ -1,34 +1,52 @@
+/* eslint-disable @typescript-eslint/camelcase */
 import Config from '../env';
 import KanvasSDK from '../src/index';
-import IUser from '../src/types/user.interface';
+import { UserInterface } from '../src/types/user.interface';
 
 const client = new KanvasSDK(Config);
 
 const email = `demo-client-js-${Date.now()}@mctekk.com`;
 const password = 'N0s3N0s3';
 const confirmPassword = 'N0s3N0s3'
-let createdUser: IUser;
+let createdUser: UserInterface;
 
 describe('Performs Users module Test', () => {
   describe('Testing user creation', () => {
     test('User cant be created with blank email', async() => {
-      const { errors: { data } } = await client.users.create('', password, confirmPassword).catch(error => error);
+      const { errors: { data } } = await client.users.create({
+        email:'',
+        password,
+        verify_password: confirmPassword
+      }).catch(error => error);
       const [error] = data;
       expect(error.email[0]).toEqual('The email field is required.');
     });
     test('User cant be created with blank passwords', async() => {
-      const { errors: { data } } = await client.users.create(email, '', '').catch(error => error);
+      const { errors: { data } } = await client.users.create({
+        email,
+        password: '',
+        verify_password: ''
+      }).catch(error => error);
       const [error] = data;
       expect(error.password[0]).toEqual('The password field is required.');
     });
     test('User cant be created with mismatching password', async() => {
-      const { errors: { message } } = await client.users.create(email, password, 'missing').catch(error => error);
+      const { errors: { message } } = await client.users.create({
+        email,
+        password,
+        verify_password: 'missing'
+      }).catch(error => error);
       expect(message).toEqual('New password and confirmation do not match.');
     });
-    test(`Create an user using email and password (${email})`, async () => {
-      const newUser = await client.users.create(email, password, confirmPassword)
+    test(`Create an user using email and password`, async () => {
+      const newUser = await client.users.create({
+        email,
+        password,
+        verify_password: confirmPassword
+      })
       createdUser = newUser;
-      expect(newUser.id).toBeDefined();
+      
+      expect(createdUser.id).toBeDefined();
     });
   })
 
@@ -60,7 +78,7 @@ describe('Performs Users module Test', () => {
     })
 
     test('Get users list', async () => {
-      const users = await client.users.get();
+      const users = await client.users.get()
       expect(users).toBeInstanceOf(Array);
       const [first] = users;
       expect(first.id).toBeDefined();
@@ -77,7 +95,7 @@ describe('Performs Users module Test', () => {
 
   // describe('Testing Delete user', () => {
   //   test(`Deleting user ${email}`, async () => {
-  //     const deleted = await client.users.delete(createdUser.id);
+  //     const deleted = await client.users.delete<UserInterface>(createdUser.id);
   //     expect(Number(deleted.id)).toBe(createdUser.id);
   //   })
   // })

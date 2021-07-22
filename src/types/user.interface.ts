@@ -2,7 +2,7 @@
 import { File } from 'types/file.interface';
 import { Location } from 'types/location.interface';
 
-export default interface User {
+export interface UserInterface {
   id: number;
   uuid: string;
   access_list: any[];
@@ -60,4 +60,10 @@ export default interface User {
   locale: string;
   roles: string;
   states: string;
+  password?: string;
+  verify_password?: string;
+}
+
+export interface CreatedUser {
+  user: UserInterface;
 }
