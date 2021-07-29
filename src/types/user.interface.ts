@@ -60,8 +60,11 @@ export interface UserInterface {
   locale: string;
   roles: string;
   states: string;
-  password?: string;
-  verify_password?: string;
+}
+
+export interface CreateUserParams extends Pick<UserInterface, 'email'> {
+  password: string;
+  verify_password: string;
 }
 
 export interface CreatedUser {
