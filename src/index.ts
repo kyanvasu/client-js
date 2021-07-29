@@ -5,6 +5,9 @@ import ClientOptions from 'types/client-options';
 import Application from 'modules/application';
 import Users from 'modules/users';
 
+// Export interface and types definitions.
+export * from './types/';
+
 export default class KanvasSDK {
   public readonly http: HttpClient;
   public readonly tokenProvider: TokenProvider;
