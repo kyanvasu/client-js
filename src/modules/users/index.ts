@@ -7,7 +7,7 @@
  */
 import Module from 'modules/module';
 import HttpClient from 'core/http-client';
-import { UserInterface, CreatedUser } from 'types/user.interface';
+import { UserInterface, CreateUserParams, CreatedUser } from 'types/user.interface';
 
 /**
  * @description Kanvas Users Module
@@ -22,7 +22,7 @@ export default class Users extends Module<UserInterface> {
    * @param {<T>} userData - Data to be posted for creating the user.
    * @returns {Promise<T>} - Newly created user.
    */
-  async create(userData: UserInterface): Promise<UserInterface> {
+  async create(userData: UserInterface | CreateUserParams): Promise<UserInterface> {
     const { data } = await this.http.request<CreatedUser>({
       method: 'POST',
       url: this.baseUrl,
