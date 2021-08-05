@@ -23,18 +23,13 @@ const file = dataURLtoFile(contents, filename, 'image/png');
 const email = 'demo@dealerappcenter.com';
 const password = 'nosenose';
 
-// console.log(contents);
-
 describe('-----', () => {
   test('.....', async() => {
     await client.auth.login(email, password);
     await client.filesystem.upload(file).then(response => {
-      console.log(response.data);
+      console.log(response);
     }).catch(error => {
       console.log('=========================', error);
     });
-    // readFileAsDataURL(file).then(respone => {
-    //   console.log(respone);
-    // });
   });
 });
