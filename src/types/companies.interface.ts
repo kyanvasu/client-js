@@ -1,6 +1,6 @@
 import { File } from 'types/file.interface';
 
-export interface CompaniesInterface {
+export interface CompanyInterface {
   id: number;
   users_id: number;
   has_activities: number;
@@ -20,4 +20,8 @@ export interface CompaniesInterface {
   address: string;
   zipcode: string;
   logo: File;
+}
+
+export interface CreateCompanyParams {
+  name: string;
 }
