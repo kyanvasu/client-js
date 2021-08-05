@@ -17,7 +17,7 @@ function dataURLtoFile(dataurl: string, filename: string, mime: string): File {
 
 const client = new KanvasSDK(Config);
 const filename = 'kanvas.png';
-const filePath = `${__dirname}/../${filename}`;
+const filePath = `${__dirname}/${filename}`;
 const contents = fs.readFileSync(filePath, {encoding: 'base64'});
 const file = dataURLtoFile(contents, filename, 'image/png');
 const email = 'demo@dealerappcenter.com';
