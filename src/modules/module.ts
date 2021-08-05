@@ -3,17 +3,17 @@ import HttpClient from 'core/http-client';
 import { FormatedResponse } from 'types/formated-response.interface';
 import { DEFAULT_PAGINATION_ARGUMENT, PaginationArgument } from 'types/pagination-argument';
 
-export default class Module<T> extends Base {
+export default class Module<T, K = void> extends Base {
   constructor(httpClient: HttpClient, baseUrl: string) {
     super(httpClient, baseUrl);
   }
 
   /**
    * @description Create a record.
-   * @param {<T>} postData - Data to be posted for creating the record.
+   * @param {<T | K>} postData - Data to be posted for creating the record.
    * @returns {Promise<T>} - Newly created record.
    */
-  async create(postData: T): Promise<T> {
+  async create(postData: T | K): Promise<T> {
     const { data } = await this.http.request<T>({
       method: 'POST',
       url: this.baseUrl,
