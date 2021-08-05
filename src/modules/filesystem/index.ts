@@ -1,5 +1,6 @@
 import HttpClient from 'core/http-client';
 import Base from 'modules/base';
+import { File } from 'types/file.interface';
 
 export default class FileSystem extends Base {
   public files: string[] = [];
@@ -8,18 +9,19 @@ export default class FileSystem extends Base {
     super(httpClient, '/filesystem');
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public upload(file: Blob): Promise<any> {
+  public async upload(file: Blob): Promise<File> {
     const formData = new FormData();
     formData.append('files', file);
 
-    return this.http.request({
-      url: `${this.baseUrl}`,
+    const { data } = await this.http.request<File>({
       method: 'POST',
+      url: this.baseUrl,
       headers: {
         'Content-Type': 'multipart/form-data'
       },
       data: formData
-    })
+    });
+
+    return data;
   }
 }
