@@ -10,6 +10,7 @@ import HttpClient from 'core/http-client';
 import UserInterface from 'types/user.interface';
 import { KanvasFormatedResponse } from 'types/kanvas-formated-response.interface';
 import { PaginationArgument, DEFAULT_PAGINATION_ARGUMENT } from 'types/pagination-argument';
+import DeviceRegisterResponse, { DevicePlatform } from 'types/device-register';
 interface CreatedUsed {
   user: UserInterface;
 }
@@ -115,6 +116,40 @@ export default class Users extends Base {
       url: `${this.baseUrl}/${userId}`,
     });
 
+    return data;
+  }
+
+  /**
+   * @description Register user device for push notifications
+   * @param {number} userId
+   * @param {string} deviceId - OneSignal Device ID 
+   * @param {DevicePlatform} devicePlatform - Device OS
+   * @returns {Promise<DeviceRegisterResponse>} - Device/User association
+   */
+  async registerDevice(userId: number, deviceId: string, devicePlatform: DevicePlatform): Promise<DeviceRegisterResponse> {
+    const formData = new FormData();
+    formData.append('app', devicePlatform);
+    formData.append('deviceId', deviceId);
+    
+    const { data } = await this.http.request<DeviceRegisterResponse>({
+      method: 'POST',
+      url: `${this.baseUrl}/${userId}/devices`,
+      data: formData,
+    });
+    return data;
+  }
+
+  /**
+   * @description Unregister user push notifications device
+   * @param {number} userId
+   * @param {string} deviceId - OneSignal Device ID 
+   * @returns {Promise<DeviceRegisterResponse>} - Device/User association
+   */
+  async unregisterDevice(userId: number, deviceId: string): Promise<DeviceRegisterResponse> {
+    const { data } = await this.http.request<DeviceRegisterResponse>({
+      method: 'DELETE',
+      url: `${this.baseUrl}/${userId}/devices/${deviceId}`,
+    });
     return data;
   }
 }

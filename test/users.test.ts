@@ -1,12 +1,14 @@
 import Config from '../env';
 import KanvasSDK from '../src/index';
 import IUser from '../src/types/user.interface';
+import { DevicePlatform } from '../src/types/device-register';
 
 const client = new KanvasSDK(Config);
 
 const email = `demo-client-js-${Date.now()}@mctekk.com`;
 const password = 'N0s3N0s3';
 const confirmPassword = 'N0s3N0s3'
+const oneSignalDummyPlayerId = '5496a433-4088-4c57-9b67-6cc2ba5f5b90';
 let createdUser: IUser;
 
 describe('Performs Users module Test', () => {
@@ -75,13 +77,23 @@ describe('Performs Users module Test', () => {
     })
   })
 
-  // describe('Testing Delete user', () => {
-  //   test(`Deleting user ${email}`, async () => {
-  //     const deleted = await client.users.delete(createdUser.id);
-  //     expect(Number(deleted.id)).toBe(createdUser.id);
-  //   })
-  // })
-
-
- 
+  describe('Testing User device Registration', () => {
+    test('Register User Device', async () => {
+      const deviceAssociation = await client.users.registerDevice(
+        createdUser.id,
+        oneSignalDummyPlayerId,
+        DevicePlatform.IOS,
+      );
+      expect(deviceAssociation.msg).toEqual('User Device Associated')
+      expect(deviceAssociation.user.id.toString()).toEqual(createdUser.id.toString());
+    })
+    test('Uregister User Device', async () => {
+      const deviceAssociation = await client.users.unregisterDevice(
+        createdUser.id,
+        oneSignalDummyPlayerId,
+      );
+      expect(deviceAssociation.msg).toEqual('User Device detached')
+      expect(deviceAssociation.user.id.toString()).toEqual(createdUser.id.toString());
+    })
+  })
 })
