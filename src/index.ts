@@ -4,6 +4,7 @@ import Auth from 'modules/auth';
 import ClientOptions from 'types/client-options';
 import Application from 'modules/application';
 import Users from 'modules/users';
+import Companies from 'modules/companies';
 import FileSystem from 'modules/filesystem';
 
 // Export interface and types definitions.
@@ -15,6 +16,7 @@ export default class KanvasSDK {
   public readonly auth: Auth;
   public readonly application: Application;
   public readonly users: Users;
+  public readonly companies: Companies;
   public readonly filesystem: FileSystem;
 
   constructor(options: ClientOptions) {
@@ -23,6 +25,7 @@ export default class KanvasSDK {
     this.auth = new Auth(this.http, this.tokenProvider);
     this.application = new Application(this.http);
     this.users = new Users(this.http);
+    this.companies = new Companies(this.http);
     this.filesystem = new FileSystem(this.http);
   }
 }
