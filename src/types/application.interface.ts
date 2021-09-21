@@ -1,7 +1,7 @@
 /**
  * @description Custom interface for application settings response.
  */
-export default interface ApplicationSettings {
+export interface ApplicationSettings {
   name: string;
   description: string;
   settings: {

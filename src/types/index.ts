@@ -1,4 +1,4 @@
-export { default as ApplicationSettings } from './application-settings';
+export { ApplicationSettings } from './application.interface';
 export { default as ClientOptions } from './client-options';
 export { File, FileAttribute } from './file.interface';
 export { FormatedResponse } from './formated-response.interface';

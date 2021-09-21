@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import HttpClient from 'core/http-client';
 import Base from 'modules/base';
-import ApplicationSettings from 'types/application-settings';
+import { ApplicationSettings } from 'types/application.interface';
 
 /**
  * @description Handles all application related operations.
