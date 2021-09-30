@@ -70,6 +70,8 @@ export default class HttpClient {
       // Remove this
       case HttpErrors.UnprocessableEntity:
         return new AuthenticationError(error);
+      case HttpErrors.InternalServerError:
+        return new AuthenticationError(error);
       default:
         return new Error(error.message);
     }
