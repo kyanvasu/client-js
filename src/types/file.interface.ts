@@ -20,3 +20,10 @@ export interface File {
   attributes: FileAttribute;
   created_at: string;
 }
+
+
+export interface RNMobileFileSignature {
+  name: string; /* name from the file */
+  type: string; /* mime type from the file */
+  uri: string; /* file path */
+}

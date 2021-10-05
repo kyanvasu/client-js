@@ -23,8 +23,8 @@ const file = dataURLtoFile(contents, filename, 'image/png');
 const email = 'demo@dealerappcenter.com';
 const password = 'nosenose';
 
-describe('-----', () => {
-  test('.....', async() => {
+describe('Testing filesystem module', () => {
+  test('Perform upload from local file', async() => {
     await client.auth.login(email, password);
     await client.filesystem.upload(file).then(response => {
       console.log(response);
