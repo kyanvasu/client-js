@@ -51,8 +51,8 @@ export default class Module<T, K = void> extends Base {
    */
   async get(pagination: PaginationArgument): Promise<FormatedResponse<T>>;
   async get(pagination: PaginationArgument = DEFAULT_PAGINATION_ARGUMENT): Promise<T[] | FormatedResponse<T>> {
-    const { page, limit, sort, format = false } = pagination;
-    const params = { page, limit, sort, format };
+    const { page, limit, sort, format = false, search = {} } = pagination;
+    const params = { page, limit, sort, format, q: this.getQuery(search) };
 
     if (format) {
       const { data } = await this.http.request<FormatedResponse<T>>({
@@ -96,5 +96,11 @@ export default class Module<T, K = void> extends Base {
     });
 
     return data;
+  }
+
+  protected getQuery(search: { [a: string]: any }): string | undefined {
+    const keys = Object.keys(search)
+    const values = keys.map((key) => `${key}:${search[key]}`);
+    return keys.length > 0 ? `(${values.join(',')})` : undefined;
   }
 }
