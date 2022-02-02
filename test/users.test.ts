@@ -64,7 +64,7 @@ describe('Performs Users module Test', () => {
     test('User can be updated', async() => {
       const lastname = 'SDK CLIENT';
       const displayname = 'kvsClientSDK';
-      expect(createdUser.lastname).toEqual('User');
+      expect(createdUser.lastname).toEqual(' ');
       const updatedUser = await client.users.update(createdUser.id, { ...createdUser, lastname, displayname })
       expect(updatedUser.lastname).toEqual(lastname);
       expect(updatedUser.displayname).toEqual(displayname);
