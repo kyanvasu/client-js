@@ -45,11 +45,16 @@ describe('Perform Companies module Test', () => {
       expect(paginatedCompanies.page).toBe(1);
       expect(companiesList.length).toBeGreaterThanOrEqual(0);
     });
-    test('Test get companies paginated list with a search', async () => {
+    test('Test get companies paginated list with a query', async () => {
       const paginatedCompanies = await client.companies.get({ format: true, q: "(is_deleted: 1)" });
       const { data: companiesList } = paginatedCompanies;
       expect(paginatedCompanies.page).toBe(1);
-      expect(companiesList.length).toBe(0);
+      
+      if (companiesList.length > 0) {
+        expect(companiesList[0].is_deleted).toBe(1);
+      } else {
+        expect(companiesList.length).toBe(0);
+      }
     });
   });
 });
