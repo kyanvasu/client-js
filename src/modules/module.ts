@@ -51,8 +51,8 @@ export default class Module<T, K = void> extends Base {
    */
   async get(pagination: PaginationArgument): Promise<FormatedResponse<T>>;
   async get(pagination: PaginationArgument = DEFAULT_PAGINATION_ARGUMENT): Promise<T[] | FormatedResponse<T>> {
-    const { page, limit, sort, format = false } = pagination;
-    const params = { page, limit, sort, format };
+    const { page, limit, sort, format = false, q } = pagination;
+    const params = { page, limit, sort, format, q  };
 
     if (format) {
       const { data } = await this.http.request<FormatedResponse<T>>({

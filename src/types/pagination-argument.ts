@@ -8,4 +8,5 @@ export interface PaginationArgument {
   limit?: number;
   sort?: string;
   format?: boolean;
+  q?: string;
 }
