@@ -46,8 +46,7 @@ describe('Perform Companies module Test', () => {
       expect(companiesList.length).toBeGreaterThanOrEqual(0);
     });
     test('Test get companies paginated list with a search', async () => {
-      // eslint-disable-next-line @typescript-eslint/camelcase
-      const paginatedCompanies = await client.companies.get({ format: true, search: { is_deleted: 1 } });
+      const paginatedCompanies = await client.companies.get({ format: true, q: "(is_deleted: 1)" });
       const { data: companiesList } = paginatedCompanies;
       expect(paginatedCompanies.page).toBe(1);
       expect(companiesList.length).toBe(0);
