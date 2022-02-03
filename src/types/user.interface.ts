@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { File } from 'types/file.interface';
 import { Location } from 'types/location.interface';
+import { RoleInterface } from './role.interface';
 
 export interface UserInterface {
   id: number;
@@ -58,7 +59,7 @@ export interface UserInterface {
   photo: File;
   files: File[];
   locale: string;
-  roles: string;
+  roles: RoleInterface[];
   states: string;
 }
 
