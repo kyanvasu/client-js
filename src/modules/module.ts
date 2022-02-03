@@ -51,23 +51,7 @@ export default class Module<T, K = void> extends Base {
    */
   async get(pagination: PaginationArgument): Promise<FormatedResponse<T>>;
   async get(pagination: PaginationArgument = DEFAULT_PAGINATION_ARGUMENT): Promise<T[] | FormatedResponse<T>> {
-    const { page, limit, sort, format = false, q } = pagination;
-    const params = { page, limit, sort, format, q  };
-
-    if (format) {
-      const { data } = await this.http.request<FormatedResponse<T>>({
-        method: 'GET',
-        url: this.baseUrl,
-        params,
-      });
-      return data;
-    }
-
-    const { data } = await this.http.request<T[]>({
-      method: 'GET',
-      url: this.baseUrl,
-    });
-    return data;
+    return this.gettable<T>(this.baseUrl, pagination);
   }
 
   /**
@@ -95,6 +79,28 @@ export default class Module<T, K = void> extends Base {
       url: `${this.baseUrl}/${id}`,
     });
 
+    return data;
+  }
+
+  protected async gettable<D>(url: string): Promise<D[]>;
+  protected async gettable<D>(url: string, pagination: PaginationArgument): Promise<FormatedResponse<D>>;
+  protected async gettable<D>(url: string, pagination: PaginationArgument = DEFAULT_PAGINATION_ARGUMENT): Promise<D[] | FormatedResponse<D>> {
+    const { page, limit, sort, format = false, q } = pagination;
+    const params = { page, limit, sort, format, q  };
+
+    if (format) {
+      const { data } = await this.http.request<FormatedResponse<D>>({
+        method: 'GET',
+        url,
+        params,
+      });
+      return data;
+    }
+
+    const { data } = await this.http.request<D[]>({
+      method: 'GET',
+      url,
+    });
     return data;
   }
 }
