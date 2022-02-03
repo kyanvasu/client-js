@@ -8,3 +8,4 @@ export { default as LoginResponse } from './login-response.interface';
 export { PaginationArgument } from './pagination-argument';
 export { default as KanvasStorage } from './storage.interface';
 export { UserInterface, CreateUserParams, CreatedUser } from './user.interface';
+export { RoleInterface } from './role.interface'
