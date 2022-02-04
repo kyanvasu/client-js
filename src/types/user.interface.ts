@@ -25,6 +25,7 @@ export interface UserInterface {
   language: string;
   lastname: string;
   lastvisit: string;
+  last_visit: string;
   location: Location;
   phone_number: string;
   profile_header: string;
