@@ -9,3 +9,4 @@ export { PaginationArgument } from './pagination-argument';
 export { default as KanvasStorage } from './storage.interface';
 export { UserInterface, CreateUserParams, CreatedUser } from './user.interface';
 export { RoleInterface } from './role.interface'
+export { CreateUserInvite, UserInvite } from './user-invite.interface'
