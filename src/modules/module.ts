@@ -85,8 +85,8 @@ export default class Module<T, K = void> extends Base {
   protected async gettable<D>(url: string): Promise<D[]>;
   protected async gettable<D>(url: string, pagination: PaginationArgument): Promise<FormatedResponse<D>>;
   protected async gettable<D>(url: string, pagination: PaginationArgument = DEFAULT_PAGINATION_ARGUMENT): Promise<D[] | FormatedResponse<D>> {
-    const { page, limit, sort, format = false, q } = pagination;
-    const params = { page, limit, sort, format, q  };
+    const { page, limit, sort, format = false, q, relationships } = pagination;
+    const params = { page, limit, sort, format, q, relationships };
 
     if (format) {
       const { data } = await this.http.request<FormatedResponse<D>>({
