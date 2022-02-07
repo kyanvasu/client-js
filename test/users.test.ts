@@ -115,4 +115,19 @@ describe('Performs Users module Test', () => {
       expect(deviceAssociation.user.id.toString()).toEqual(createdUser.id.toString());
     })
   })
+
+  describe('Testing User invitation', () => {
+    beforeEach(async () => {
+      await client.auth.login('demo@dealerappcenter.com', 'nosenose');
+    })
+
+    test(`Invite an user using email and role_id`, async () => {
+      const invitation = await client.users.invite({
+        email,
+        role_id: 1
+      })
+      
+      expect(invitation.id).toBeDefined();
+    });
+  })
 })

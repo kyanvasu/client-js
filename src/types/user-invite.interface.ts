@@ -1,11 +1,11 @@
-export interface UserInvite {
+export interface UserInviteInterface {
   id: number;
-  apps_id: number;
-  companies_id: number;
   email: string;
+  role_id: number;
   invite_hash: string;
+  apps_id?: number;
+  companies_id?: number;
   is_deleted?: boolean;
-  role_id?: number;
   users_id?: number;
   created_at?: string;
   updated_at?: string;
