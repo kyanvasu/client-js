@@ -7,6 +7,7 @@ import Users from 'modules/users';
 import Companies from 'modules/companies';
 import FileSystem from 'modules/filesystem';
 import Roles from 'modules/roles';
+import UserInvite from 'modules/users-invite';
 
 // Export interface and types definitions.
 export * from './types/';
@@ -20,6 +21,7 @@ export default class KanvasSDK {
   public readonly companies: Companies;
   public readonly filesystem: FileSystem;
   public readonly roles: Roles;
+  public readonly userInvite: UserInvite;
 
   constructor(options: ClientOptions) {
     this.tokenProvider = new TokenProvider(options);
@@ -30,5 +32,6 @@ export default class KanvasSDK {
     this.companies = new Companies(this.http);
     this.filesystem = new FileSystem(this.http);
     this.roles = new Roles(this.http);
+    this.userInvite = new UserInvite(this.http);
   }
 }

@@ -9,6 +9,7 @@ import Module from 'modules/module';
 import HttpClient from 'core/http-client';
 import { UserInterface, CreateUserParams, CreatedUser } from 'types/user.interface';
 import DeviceRegisterResponse, { DevicePlatform } from 'types/device-register';
+import { CreateUserInvite, UserInviteInterface } from 'types/user-invite.interface';
 
 /**
  * @description Kanvas Users Module
@@ -64,6 +65,21 @@ export default class Users extends Module<UserInterface, CreateUserParams> {
       method: 'DELETE',
       url: `${this.baseUrl}/${userId}/devices/${deviceId}`,
     });
+    return data;
+  }
+
+  /**
+   * @description Invites a new user.
+   * @param {<CreateUserInvite>} userData - Data to be posted for creating the user invitation.
+   * @returns {Promise<UserInviteInterface>} - Newly created user invitation.
+   */
+  async invite(userData: CreateUserInvite): Promise<UserInviteInterface> {
+    const { data } = await this.http.request<UserInviteInterface>({
+      method: 'POST',
+      url: `${this.baseUrl}/invite`,
+      data: userData
+    });
+
     return data;
   }
 }

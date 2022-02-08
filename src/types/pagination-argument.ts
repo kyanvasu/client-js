@@ -9,4 +9,5 @@ export interface PaginationArgument {
   sort?: string;
   format?: boolean;
   q?: string;
+  relationships?: string;
 }
