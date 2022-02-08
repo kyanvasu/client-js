@@ -30,6 +30,11 @@ describe('Performs Users Invite module Test', () => {
       expect(invite.id).toBeDefined();
     })
 
+    test('Resend invitation to a user', async () => {
+      const message = await client.userInvite.resend(createdInvite.id);
+
+      expect(message).toBe('Success');
+    });
   })
 
   describe('Testing GET user invites', () => {
