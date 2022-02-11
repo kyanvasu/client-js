@@ -2,6 +2,13 @@ import HttpClient from 'core/http-client';
 import Base from 'modules/base';
 import { File, RNMobileFileSignature } from 'types/file.interface';
 
+export interface UploadOptionsInterface {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onUploadProgress?: (event: any) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onDownloadProgress?: (event: any) => void;
+}
+
 export default class FileSystem extends Base {
   public files: string[] = [];
 
@@ -9,9 +16,15 @@ export default class FileSystem extends Base {
     super(httpClient, '/filesystem');
   }
 
-  public async upload(file: Blob, fieldName?: string): Promise<File[]> 
-  public async upload(file: Blob[], fieldName?: string): Promise<File[]> 
-  public async upload(files: Blob | Blob[], fieldName: string = 'files'): Promise<File[]> {
+  /**
+   * @description handle the file uploading to the server
+   * @param file {Blob | Blob[]} file to be uploaded
+   * @param fieldName {string | undefined} name of the file to be upload
+   * @param options {UploadOptionsInterface | undefined} custom options to get from the file upload
+   */
+  public async upload(file: Blob, fieldName?: string, options?: UploadOptionsInterface): Promise<File[]> 
+  public async upload(file: Blob[], fieldName?: string, options?: UploadOptionsInterface): Promise<File[]> 
+  public async upload(files: Blob | Blob[], fieldName: string = 'files', options?: UploadOptionsInterface): Promise<File[]> {
     const formData = new FormData();
     if (Array.isArray(files)) {
       files.forEach((item, index)  => {
@@ -26,7 +39,9 @@ export default class FileSystem extends Base {
       headers: {
         'Content-Type': 'multipart/form-data'
       },
-      data: formData
+      data: formData,
+      onUploadProgress: options?.onUploadProgress,
+      onDownloadProgress: options?.onDownloadProgress,
     });
 
     return data;

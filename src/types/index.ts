@@ -10,3 +10,4 @@ export { default as KanvasStorage } from './storage.interface';
 export { UserInterface, CreateUserParams, CreatedUser } from './user.interface';
 export { RoleInterface } from './role.interface'
 export { CreateUserInvite, UserInviteInterface } from './user-invite.interface'
+export { CompanyInterface, CreateCompanyParams } from './companies.interface'
