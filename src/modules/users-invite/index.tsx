@@ -7,6 +7,15 @@ export default class UserInvite extends Module<UserInviteInterface> {
     super(http, '/users-invite')
   }
 
+  async getByHash(hash: string): Promise<UserInviteInterface> {
+    const { data } = await this.http.request<UserInviteInterface>({
+      url: `${this.baseUrl}/validate/${hash}`,
+      method: 'GET'
+    });
+    
+    return data;
+  }
+
   /**
    * @description Resend an invitation to a created user
    * @param {number|string} id user invitation id to resend the message

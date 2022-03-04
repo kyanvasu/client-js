@@ -62,6 +62,7 @@ export interface UserInterface {
   locale: string;
   roles: RoleInterface[];
   states: string;
+  intro?: string;
 }
 
 export interface CreateUserParams extends Pick<UserInterface, 'email'> {
