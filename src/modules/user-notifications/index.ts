@@ -1,13 +1,6 @@
 import HttpClient from "core/http-client";
 import Base from "modules/base";
-
-interface UserNotificationInterface {
-  name: string;
-  description: string;
-  is_enabled: boolean;
-  notifications_types_id: number;
-  children: UserNotificationInterface[];
-}
+import { UserNotificationInterface } from "types/user-notifications.interface";
 
 export default class UserNotifications extends Base {
   constructor (http: HttpClient) {

@@ -11,3 +11,4 @@ export { UserInterface, CreateUserParams, CreatedUser } from './user.interface';
 export { RoleInterface } from './role.interface'
 export { CreateUserInvite, UserInviteInterface } from './user-invite.interface'
 export { CompanyInterface, CreateCompanyParams } from './companies.interface'
+export { UserNotificationInterface } from './user-notifications.interface';
