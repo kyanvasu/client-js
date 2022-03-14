@@ -10,9 +10,9 @@ export default class CompaniesBranches extends Module<CompaniesBranchesInterface
     super(http, '/companies-branches');
   }
 
-  async getUsers(id: number): Promise<UserInterface[]>;
-  async getUsers(id: number, pagination: PaginationArgument): Promise<FormatedResponse<UserInterface>>;
-  async getUsers(id: number, pagination: PaginationArgument = DEFAULT_PAGINATION_ARGUMENT): Promise<UserInterface[] | FormatedResponse<UserInterface>> {
+  async getUsers(id: number | string): Promise<UserInterface[]>;
+  async getUsers(id: number | string, pagination: PaginationArgument): Promise<FormatedResponse<UserInterface>>;
+  async getUsers(id: number | string, pagination: PaginationArgument = DEFAULT_PAGINATION_ARGUMENT): Promise<UserInterface[] | FormatedResponse<UserInterface>> {
     const url = `${this.baseUrl}/${id}/users`;
     return this.gettable<UserInterface>(url, pagination);
   }
