@@ -9,7 +9,7 @@ export default class UserNotifications extends Base {
 
   async get(id: number | string): Promise<UserNotificationInterface[]> {
     const { data } = await this.http.request<UserNotificationInterface[]>({
-      baseURL: this.getBaseUrl(id),
+      url: this.getBaseUrl(id),
       method: 'GET'
     });
 
@@ -18,7 +18,7 @@ export default class UserNotifications extends Base {
 
   async update(id: number | string, notification: UserNotificationInterface): Promise<UserNotificationInterface> {
     const { data } = await this.http.request<UserNotificationInterface>({
-      baseURL: `${this.getBaseUrl(id)}/${notification.notifications_types_id}`,
+      url: `${this.getBaseUrl(id)}/${notification.notifications_types_id}`,
       method: 'PUT',
       data: notification
     });
@@ -28,7 +28,7 @@ export default class UserNotifications extends Base {
 
   async delete(id: number | string): Promise<string> {
     const { data } = await this.http.request<string>({
-      baseURL: this.getBaseUrl(id),
+      url: this.getBaseUrl(id),
       method: 'DELETE'
     });
 

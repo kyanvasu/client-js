@@ -92,7 +92,7 @@ export default class Module<T, K = void> extends Base {
   async addFile(id: number | string, attachments: AttachFile[]): Promise<T> {
     const { data } = await this.http.request<T>({
       method: 'PUT',
-      baseURL: `${this.baseUrl}/${id}`,
+      url: `${this.baseUrl}/${id}`,
       data: {
         files: attachments.map(attach => ({ ...attach, id: attach.id || id}))
       }
@@ -110,7 +110,7 @@ export default class Module<T, K = void> extends Base {
   async removeFile(id: number | string, files: File[]): Promise<T> {
     const { data } = await this.http.request<T>({
       method: 'PUT',
-      baseURL: `${this.baseUrl}/${id}`,
+      url: `${this.baseUrl}/${id}`,
       data: {
         // eslint-disable-next-line @typescript-eslint/camelcase
         files: files.map(file => ({ ...file, is_deleted: 1, }))
