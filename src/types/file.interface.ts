@@ -19,8 +19,15 @@ export interface File {
   file_type: string;
   attributes: FileAttribute;
   created_at: string;
+  is_deleted?: number;
 }
 
+
+export interface AttachFile {
+  name: string;
+  filesystem_id: number | string;
+  id?: number | string;
+}
 
 export interface RNMobileFileSignature {
   name: string; /* name from the file */

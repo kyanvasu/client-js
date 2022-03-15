@@ -2,6 +2,7 @@ import Base from './base';
 import HttpClient from 'core/http-client';
 import { FormatedResponse } from 'types/formated-response.interface';
 import { DEFAULT_PAGINATION_ARGUMENT, PaginationArgument } from 'types/pagination-argument';
+import { AttachFile, File } from 'types/file.interface';
 
 export default class Module<T, K = void> extends Base {
   constructor(httpClient: HttpClient, baseUrl: string) {
@@ -77,6 +78,43 @@ export default class Module<T, K = void> extends Base {
     const { data } = await this.http.request<T>({
       method: 'DELETE',
       url: `${this.baseUrl}/${id}`,
+    });
+
+    return data;
+  }
+  
+  /**
+   * @description Adds a file to the current entity.
+   * @param {number|string} id 
+   * @param {AttachFile[]} attachments
+   * @returns {Promise<T>} - Updated record.
+   */
+  async addFile(id: number | string, attachments: AttachFile[]): Promise<T> {
+    const { data } = await this.http.request<T>({
+      method: 'PUT',
+      url: `${this.baseUrl}/${id}`,
+      data: {
+        files: attachments.map(attach => ({ ...attach, id: attach.id || id}))
+      }
+    });
+
+    return data;
+  }
+
+  /**
+   * @description Removes a file from the current entity.
+   * @param {number|string} id 
+   * @param {File[]} files 
+   * @returns {Promise<T>} - Updated record.
+   */
+  async removeFile(id: number | string, files: File[]): Promise<T> {
+    const { data } = await this.http.request<T>({
+      method: 'PUT',
+      url: `${this.baseUrl}/${id}`,
+      data: {
+        // eslint-disable-next-line @typescript-eslint/camelcase
+        files: files.map(file => ({ ...file, is_deleted: 1, }))
+      }
     });
 
     return data;
