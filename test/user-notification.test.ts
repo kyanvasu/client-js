@@ -20,13 +20,13 @@ describe('Performs User Notifications  module Test', () => {
     expect(notifications.length).toBeGreaterThanOrEqual(0)
   })
 
-  test('Update existing user notification', async () => {
-    const current = await client.userNotifications.update(0, {
-      ...notification,
-      is_enabled: 0,
-    });
-    expect(current.is_enabled).toBe(0)
-  })
+  // test('Update existing user notification', async () => {
+  //   const current = await client.userNotifications.update(0, {
+  //     ...notification,
+  //     is_enabled: 0,
+  //   });
+  //   expect(current.is_enabled).toBe(0)
+  // })
 
   test('Disable all user notifications', async() => {
     const notifications = await client.userNotifications.delete(0);
