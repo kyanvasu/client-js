@@ -27,8 +27,8 @@ export default class HttpClient {
     });
     this.options = options;
     this.tokenProvider = tokenProvider;
-    this.setupResponseInterceptors();
     this.setupRefreshInterceptor();
+    this.setupResponseInterceptors();
   }
 
   setupResponseInterceptors(): void {
@@ -54,7 +54,7 @@ export default class HttpClient {
       this.tokenProvider.setRefreshToken(data.refresh_token);
       failedRequest.response.config.headers.Authorization = data.token;
       return Promise.resolve();
-    }));
+    }), { statusCodes: [401, 499] });
   }
 
   /**
