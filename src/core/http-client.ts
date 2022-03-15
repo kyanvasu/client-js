@@ -25,10 +25,10 @@ export default class HttpClient {
     this.http = axios.create({
       baseURL: options.baseUrl,
     });
-    this.setupRefreshInterceptor();
-    this.setupResponseInterceptors();
-    this.tokenProvider = tokenProvider;
     this.options = options;
+    this.tokenProvider = tokenProvider;
+    this.setupResponseInterceptors();
+    this.setupRefreshInterceptor();
   }
 
   setupResponseInterceptors(): void {
@@ -42,6 +42,7 @@ export default class HttpClient {
     createAuthRefreshInterceptor(this.http, failedRequest => axios({
       method: "POST",
       url: "/refresh-token",
+      baseURL: this.options.baseUrl,
       data: {
         // eslint-disable-next-line @typescript-eslint/camelcase
         access_token: this.tokenProvider.getToken(),
