@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import Config from '../env';
-import KanvasSDK, { UserNotificationInterface } from '../src/index';
+import KanvasSDK from '../src/index';
 
 const client = new KanvasSDK(Config);
 
 const email = 'demo@dealerappcenter.com';
 const password = 'nosenose';
 
-let notification: UserNotificationInterface;
+// let notification: UserNotificationInterface;
 
 describe('Performs User Notifications  module Test', () => {
   beforeEach(async () =>{
@@ -16,7 +16,7 @@ describe('Performs User Notifications  module Test', () => {
 
   test('Get all user notifications', async () => {
     const notifications = await client.userNotifications.get(0);
-    notification = notifications[0];
+    // notification = notifications[0];
     expect(notifications.length).toBeGreaterThanOrEqual(0)
   })
 
