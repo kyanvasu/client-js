@@ -82,4 +82,22 @@ export default class Users extends Module<UserInterface, CreateUserParams> {
 
     return data;
   }
+
+  async recoverAccount(id: number): Promise<any> {
+    const { data } = await this.http.request({
+      method: 'POST',
+      url: `${this.baseUrl}/${id}/request-delete-account`
+    });
+
+    return data;
+  }
+
+  async deleteAccount(id: number): Promise<any> {
+    const { data } = await this.http.request({
+      method: 'DELETE',
+      url: `${this.baseUrl}/${id}/request-delete-account`
+    });
+
+    return data;
+  }
 }
