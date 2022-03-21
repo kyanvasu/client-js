@@ -11,6 +11,16 @@ export interface UserInviteInterface {
   updated_at?: string;
 }
 
+export interface UserInviteHashInterface extends UserInviteInterface {
+  company: string;
+  company_branch: string;
+  user: {
+    firstname: string;
+    lastname: string;
+  };
+  role: string;
+}
+
 export interface CreateUserInvite {
   email: string;
   role_id: number;
