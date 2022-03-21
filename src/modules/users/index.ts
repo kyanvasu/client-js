@@ -83,8 +83,8 @@ export default class Users extends Module<UserInterface, CreateUserParams> {
     return data;
   }
 
-  async recoverAccount(id: number): Promise<any> {
-    const { data } = await this.http.request({
+  async requestDeleteAccount(id: number): Promise<UserInterface> {
+    const { data } = await this.http.request<UserInterface>({
       method: 'POST',
       url: `${this.baseUrl}/${id}/request-delete-account`
     });
@@ -92,8 +92,8 @@ export default class Users extends Module<UserInterface, CreateUserParams> {
     return data;
   }
 
-  async deleteAccount(id: number): Promise<any> {
-    const { data } = await this.http.request({
+  async removeRequestDeleteAccount(id: number): Promise<UserInterface> {
+    const { data } = await this.http.request<UserInterface>({
       method: 'DELETE',
       url: `${this.baseUrl}/${id}/request-delete-account`
     });
