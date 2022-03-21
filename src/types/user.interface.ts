@@ -63,6 +63,7 @@ export interface UserInterface {
   roles: RoleInterface[];
   states: string;
   intro?: string;
+  manager_id?: string;
 }
 
 export interface CreateUserParams extends Pick<UserInterface, 'email'> {
