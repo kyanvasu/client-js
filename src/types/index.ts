@@ -1,4 +1,4 @@
-export { ApplicationSettings } from './application.interface';
+export { ApplicationSettings, AppInterface } from './application.interface';
 export { default as ClientOptions } from './client-options';
 export { File, FileAttribute, RNMobileFileSignature, AttachFile } from './file.interface';
 export { FormatedResponse } from './formated-response.interface';
