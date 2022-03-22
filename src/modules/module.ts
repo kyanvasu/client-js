@@ -67,7 +67,8 @@ export default class Module<T, K = void> extends Base {
    * @param {FindPaginationArgument} params 
    * @returns {Promise<T>}
    */
-  async getById(id: number | string, params?: FindPaginationArgument): Promise<T> {
+  async getById(id: number | string, params: FindPaginationArgument): Promise<T>; 
+  async getById(id: number | string, params: FindPaginationArgument = { relationships: undefined }): Promise<T> {
     const { data } = await this.http.request<T>({
       method: 'GET',
       url: `${this.baseUrl}/${id}`,
