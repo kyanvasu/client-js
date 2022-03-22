@@ -16,7 +16,7 @@ let createdInvite: UserInviteInterface;
 
 
 describe('Performs Users Invite module Test', () => {
-  beforeAll(async () => {
+  beforeEach(async () => {
     await client.auth.login(email, password);
   })
 
