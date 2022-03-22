@@ -1,7 +1,7 @@
 import HttpClient from "core/http-client";
 import { UserInviteInterface, UserInviteHashInterface, ProcessUserInvite } from "index";
 import Module from "modules/module";
-import { UserInterface } from "types/user.interface";
+import { CreatedUser } from "types/user.interface";
 
 export default class UserInvite extends Module<UserInviteInterface> {
   constructor(http: HttpClient) {
@@ -14,8 +14,8 @@ export default class UserInvite extends Module<UserInviteInterface> {
    * @param {CreateUserInvite} user - user invite info to be store 
    * @returns {UserInterface}
    */
-  async process(hash: string, user: ProcessUserInvite): Promise<UserInterface> {
-    const { data } = await this.http.request<UserInterface>({
+  async process(hash: string, user: ProcessUserInvite): Promise<CreatedUser> {
+    const { data } = await this.http.request<CreatedUser>({
       url: `${this.baseUrl}/${hash}`,
       method: 'POST',
       data: user,

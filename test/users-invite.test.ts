@@ -60,7 +60,12 @@ describe('Performs Users Invite module Test', () => {
 
   describe('Testing process user invites', () => {
     test('convert invite user into user', async () => {
-      const user = await client.userInvite.process({
+      const invite = await client.users.invite({
+        email: inviteEmail,
+        role_id: 1
+      });
+      
+      const { user } = await client.userInvite.process(invite.invite_hash, {
         email: inviteEmail,
         verify_password: password,
         password,
@@ -69,6 +74,8 @@ describe('Performs Users Invite module Test', () => {
       });
 
       expect(user.email).toBe(inviteEmail);
+      expect(user.firstname).toBe(firstname);
+      expect(user.lastname).toBe(lastname);
     });
   })
 })
