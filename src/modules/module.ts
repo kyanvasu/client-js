@@ -1,7 +1,7 @@
 import Base from './base';
 import HttpClient from 'core/http-client';
 import { FormatedResponse } from 'types/formated-response.interface';
-import { DEFAULT_PAGINATION_ARGUMENT, PaginationArgument } from 'types/pagination-argument';
+import { DEFAULT_PAGINATION_ARGUMENT, FindPaginationArgument, PaginationArgument } from 'types/pagination-argument';
 import { AttachFile, File } from 'types/file.interface';
 
 export default class Module<T, K = void> extends Base {
@@ -60,10 +60,18 @@ export default class Module<T, K = void> extends Base {
    * @param {number|string} id 
    * @returns {Promise<T>}
    */
-  async getById(id: number | string): Promise<T> {
+  async getById(id: number | string): Promise<T>;
+  /**
+   * @description Get an record by its ID and params.
+   * @param {number|string} id 
+   * @param {FindPaginationArgument} params 
+   * @returns {Promise<T>}
+   */
+  async getById(id: number | string, params?: FindPaginationArgument): Promise<T> {
     const { data } = await this.http.request<T>({
       method: 'GET',
       url: `${this.baseUrl}/${id}`,
+      params,
     });
 
     return data;

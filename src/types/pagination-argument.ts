@@ -11,3 +11,7 @@ export interface PaginationArgument {
   q?: string;
   relationships?: string;
 }
+
+export interface FindPaginationArgument {
+  relationships?: string;
+}
