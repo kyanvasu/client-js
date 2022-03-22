@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import HttpClient from 'core/http-client';
 import Base from 'modules/base';
-import { ApplicationSettings } from 'types/application.interface';
+import { AppInterface, ApplicationSettings } from 'types/application.interface';
 
 /**
  * @description Handles all application related operations.
@@ -12,6 +12,14 @@ import { ApplicationSettings } from 'types/application.interface';
 export default class Application extends Base {
   constructor(http: HttpClient) {
     super(http, '/apps');
+  }
+
+  async getApps(): Promise<AppInterface[]> { 
+    const { data } = await this.http.request<AppInterface[]>({
+      url: this.baseUrl
+    });
+
+    return data;
   }
 
   /**

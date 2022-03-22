@@ -33,6 +33,11 @@ describe('Perform Companies module Test', () => {
       expect(Number(company.id)).toEqual(Number(createdCompany.id));
       expect(company.name).toEqual(createdCompany.name);
     });
+    test('Test get company by id with apps key', async () => {
+      const company = await client.companies.getById(createdCompany.id, { relationships: 'apps' });
+      expect(Number(company.id)).toEqual(Number(createdCompany.id));
+      expect(company.apps).toBeDefined();
+    });
     test('Test get companies plain list', async () => {
       const companiesList = await client.companies.get();
       expect(companiesList).toBeInstanceOf(Array);

@@ -20,6 +20,13 @@ export interface CompanyInterface {
   address: string;
   zipcode: string;
   logo: File;
+  apps?: {
+    companies_id: number | string;
+    apps_id: number | string;
+    created_at?: string;
+    updated_at?: string;
+    is_deleted?: number | boolean;
+  };
 }
 
 export interface CreateCompanyParams {

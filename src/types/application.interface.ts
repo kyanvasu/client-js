@@ -1,3 +1,22 @@
+
+export interface AppInterface {
+  id: number | string;
+  name: string;
+  description: string;
+  url: string;
+  domain: any | null;
+  default_apps_plan_id: number;
+  is_actived: number | boolean;
+  key: string;
+  payments_active: number;
+  ecosystem_auth: number;
+  is_public: number;
+  domain_based: string;
+  created_at?: string;
+  updated_at?: string;
+  is_deleted?: number | boolean;
+}
+
 /**
  * @description Custom interface for application settings response.
  */
