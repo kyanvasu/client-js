@@ -60,22 +60,27 @@ describe('Performs Users Invite module Test', () => {
 
   describe('Testing process user invites', () => {
     test('convert invite user into user', async () => {
-      const invite = await client.users.invite({
-        email: inviteEmail,
-        role_id: 1
-      });
-      
-      const { user } = await client.userInvite.process(invite.invite_hash, {
-        email: inviteEmail,
-        verify_password: password,
-        password,
-        firstname,
-        lastname,
-      });
-
-      expect(user.email).toBe(inviteEmail);
-      expect(user.firstname).toBe(firstname);
-      expect(user.lastname).toBe(lastname);
+      try {
+        const invite = await client.users.invite({
+          email: inviteEmail,
+          role_id: 1
+        });
+        
+        const { user } = await client.userInvite.process(invite.invite_hash, {
+          email: inviteEmail,
+          verify_password: password,
+          password,
+          firstname,
+          lastname,
+        });
+  
+        expect(user.email).toBe(inviteEmail);
+        expect(user.firstname).toBe(firstname);
+        expect(user.lastname).toBe(lastname);
+      } catch (e) {
+        console.log();
+        expect(true).toBeFalsy();
+      }
     });
   })
 })
