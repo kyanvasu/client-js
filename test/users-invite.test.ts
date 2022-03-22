@@ -8,6 +8,8 @@ const client = new KanvasSDK(Config);
 const inviteEmail = `demo-client-js-${Date.now()}@mctekk.com`;
 
 const email = 'demo@dealerappcenter.com';
+const firstname = 'Demo';
+const lastname = 'Test';
 const password = 'nosenose';
 
 let createdInvite: UserInviteInterface;
@@ -54,5 +56,31 @@ describe('Performs Users Invite module Test', () => {
       const deleteInvite = await client.userInvite.remove(createdInvite.id);
       expect(deleteInvite).toBeDefined()
     })
+  })
+
+  describe('Testing process user invites', () => {
+    test('convert invite user into user', async () => {
+      try {
+        const invite = await client.users.invite({
+          email: inviteEmail,
+          role_id: 1
+        });
+        
+        const { user } = await client.userInvite.process(invite.invite_hash, {
+          email: inviteEmail,
+          verify_password: password,
+          password,
+          firstname,
+          lastname,
+        });
+  
+        expect(user.email).toBe(inviteEmail);
+        expect(user.firstname).toBe(firstname);
+        expect(user.lastname).toBe(lastname);
+      } catch (e) {
+        console.log();
+        expect(true).toBeFalsy();
+      }
+    });
   })
 })
