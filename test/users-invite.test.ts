@@ -8,13 +8,15 @@ const client = new KanvasSDK(Config);
 const inviteEmail = `demo-client-js-${Date.now()}@mctekk.com`;
 
 const email = 'demo@dealerappcenter.com';
+const firstname = 'Demo';
+const lastname = 'Test';
 const password = 'nosenose';
 
 let createdInvite: UserInviteInterface;
 
 
 describe('Performs Users Invite module Test', () => {
-  beforeEach(async () => {
+  beforeAll(async () => {
     await client.auth.login(email, password);
   })
 
@@ -54,5 +56,19 @@ describe('Performs Users Invite module Test', () => {
       const deleteInvite = await client.userInvite.remove(createdInvite.id);
       expect(deleteInvite).toBeDefined()
     })
+  })
+
+  describe('Testing process user invites', () => {
+    test('convert invite user into user', async () => {
+      const user = await client.userInvite.process({
+        email: inviteEmail,
+        verify_password: password,
+        password,
+        firstname,
+        lastname,
+      });
+
+      expect(user.email).toBe(inviteEmail);
+    });
   })
 })

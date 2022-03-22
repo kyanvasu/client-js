@@ -25,3 +25,11 @@ export interface CreateUserInvite {
   email: string;
   role_id: number;
 }
+
+export interface ProcessUserInvite {
+  email: string;
+  firstname: string;
+  lastname: string;
+  password: string;
+  verify_password: string;
+}
