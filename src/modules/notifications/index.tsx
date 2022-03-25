@@ -1,23 +1,40 @@
 import HttpClient from "core/http-client";
 import Base from "modules/base";
+import { FormatedResponse } from "types/formated-response.interface";
 import { NotificationInterface } from "types/notification.interface";
-import { PaginationArgument } from "types/pagination-argument";
+import { DEFAULT_PAGINATION_ARGUMENT, PaginationArgument } from "types/pagination-argument";
 
-export class Notification extends Base {
+export class Notifications extends Base {
   constructor(http: HttpClient) {
     super(http, 'notifications');
   }
   
   /**
    * @description Get company notification base on the logged user
-   * @param {PaginationArgument | undefined} params parameters to fetch the notifications
    * @returns {NotificationInterface[]}
    */
-  async get(params?: PaginationArgument): Promise<NotificationInterface[]> {
+  async get(): Promise<NotificationInterface[]>;
+    /**
+   * @description Get company notification base on the logged user
+   * @param {PaginationArgument} params parameters to fetch the notifications
+   * @returns {FormatedResponse<NotificationInterface>[]}
+   */
+  async get(params: PaginationArgument): Promise<FormatedResponse<NotificationInterface>>;
+  async get(params: PaginationArgument = DEFAULT_PAGINATION_ARGUMENT): Promise<NotificationInterface[] | FormatedResponse<NotificationInterface>> {
+    if (params.format) {
+      const result = await this.http.request<FormatedResponse<NotificationInterface>>({
+        url: this.baseUrl,
+        method: 'GET',
+        params
+      });
+      
+      return result.data;
+    }
+
     const result = await this.http.request<NotificationInterface[]>({
       url: this.baseUrl,
       method: 'GET',
-      params
+      params: params?.format ? params : undefined,
     });
 
     return result.data;
