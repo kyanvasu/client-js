@@ -13,3 +13,4 @@ export { CreateUserInvite, UserInviteInterface, UserInviteHashInterface, Process
 export { CompanyInterface, CreateCompanyParams } from './companies.interface'
 export { UserNotificationInterface } from './user-notifications.interface';
 export { CompaniesBranchesInterface, CreateCompaniesBranchesInterface } from './companies-branches.interface';
+export { AppsPlanInterface, PaymentMethodInterface } from './apps-plan.interface'
