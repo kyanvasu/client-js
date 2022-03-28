@@ -59,7 +59,7 @@ describe('Performs Users Invite module Test', () => {
   })
 
   describe('Testing process user invites', () => {
-    test('convert invite user into user', async () => {
+    test('should convert invite user into user', async () => {
       try {
         const invite = await client.users.invite({
           email: inviteEmail,
