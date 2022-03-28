@@ -1,5 +1,5 @@
 
-export interface AppsPlanInterface {
+export interface SubscriptionInterface {
   id: string | number;
   apps_id: number;
   name: string;
@@ -17,6 +17,12 @@ export interface AppsPlanInterface {
   created_at?: string;
   updated_at?: string;
   is_deleted?: number | boolean;
+}
+
+export interface UpdateSubsctiptionInterface {
+  stripe_id: string | number;
+  payment_style: 'monthly' | 'yearly';
+  stripe_plan: string;
 }
 
 export interface PaymentMethodInterface {

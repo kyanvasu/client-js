@@ -1,11 +1,11 @@
 import Config from '../env';
-import KanvasSDK, { NotificationInterface } from '../src/index';
+import KanvasSDK from '../src/index';
 const client = new KanvasSDK(Config);
 
 const email = 'demo@dealerappcenter.com';
 const password = 'nosenose';
 
-let notifications: NotificationInterface[];
+// let notifications: NotificationInterface[];
 
 describe('Perform Notifications module Test', () => {
   beforeAll(async () => {
@@ -25,7 +25,7 @@ describe('Perform Notifications module Test', () => {
       sort: 'created_at|DESC'
     });
 
-    notifications = data;
+    // notifications = data;
     expect(data.length).toBeGreaterThanOrEqual(1);
   });
 
