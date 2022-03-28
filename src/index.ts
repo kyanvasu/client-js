@@ -10,6 +10,8 @@ import Roles from 'modules/roles';
 import UserInvite from 'modules/users-invite';
 import CompaniesBranches from 'modules/companies-branches';
 import UserNotifications from 'modules/user-notifications';
+import { Notifications } from 'modules/notifications';
+import Subscription from 'modules/subscription';
 
 // Export interface and types definitions.
 export * from './types/';
@@ -26,6 +28,8 @@ export default class KanvasSDK {
   public readonly userInvite: UserInvite;
   public readonly companiesBranches: CompaniesBranches;
   public readonly userNotifications: UserNotifications;
+  public readonly notifications: Notifications;
+  public readonly subscription: Subscription;
 
   constructor(options: ClientOptions) {
     this.tokenProvider = new TokenProvider(options);
@@ -39,5 +43,7 @@ export default class KanvasSDK {
     this.userInvite = new UserInvite(this.http);
     this.companiesBranches = new CompaniesBranches(this.http);
     this.userNotifications = new UserNotifications(this.http);
+    this.notifications = new Notifications(this.http);
+    this.subscription = new Subscription(this.http);
   }
 }
