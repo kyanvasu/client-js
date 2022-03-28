@@ -78,7 +78,7 @@ describe('Performs Users Invite module Test', () => {
         expect(user.firstname).toBe(firstname);
         expect(user.lastname).toBe(lastname);
       } catch (e) {
-        console.log();
+        console.log(e);
         expect(true).toBeFalsy();
       }
     });
