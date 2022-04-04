@@ -43,6 +43,9 @@ export default class HttpClient {
       method: "POST",
       url: "/refresh-token",
       baseURL: this.options.baseUrl,
+      headers: {
+        Authorization: this.tokenProvider.getToken(),
+      },
       data: {
         // eslint-disable-next-line @typescript-eslint/camelcase
         access_token: this.tokenProvider.getToken(),
