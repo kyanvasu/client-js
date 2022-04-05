@@ -47,7 +47,7 @@ describe('Performs Users Invite module Test', () => {
 
     test('Get user invite by id', async () => {
       const invite = await client.userInvite.getById(createdInvite.id);
-      expect(invite.id).toBe(createdInvite.id);
+      expect(String(invite.id)).toBe(String(createdInvite.id));
     })
   })
 
