@@ -1,3 +1,5 @@
+// code.bryan currently using this tutorial to compile the app https://souporserious.com/bundling-typescript-with-esbuild-for-npm/
+
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { build } = require('esbuild')
 const { dependencies } = require('./package.json')
