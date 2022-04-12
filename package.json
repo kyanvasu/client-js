@@ -1,7 +1,8 @@
 {
-  "version": "0.6.1",
+  "version": "0.6.2",
   "license": "MIT",
   "main": "dist/index.js",
+  "module": "dist/index.esm.js",
   "typings": "dist/index.d.ts",
   "files": [
     "dist",
@@ -12,7 +13,7 @@
   },
   "scripts": {
     "start": "tsdx watch",
-    "build": "npm test && rm -rf dist && tsc -p .",
+    "build": "npm test && rm -rf dist && node build.js",
     "test": "tsdx test",
     "lint": "eslint",
     "size": "size-limit",
@@ -27,7 +28,6 @@
   },
   "name": "@kanvas/client-js",
   "author": "Rogelio Morey",
-  "module": "dist/client-js.esm.js",
   "size-limit": [
     {
       "path": "dist/client-js.cjs.production.min.js",
@@ -40,8 +40,10 @@
   ],
   "devDependencies": {
     "@size-limit/preset-small-lib": "^5.0.1",
+    "esbuild": "^0.14.34",
     "husky": "^7.0.0",
     "lint-staged": "^11.0.0",
+    "npm-dts": "^1.3.11",
     "size-limit": "^5.0.1",
     "ts-node": "^10.0.0",
     "ts-patch": "^1.3.4",
