@@ -1,5 +1,5 @@
 import HttpClient from "core/http-client";
-import { UserInviteInterface, UserInviteHashInterface, ProcessUserInvite } from "index";
+import { UserInviteInterface, UserInviteHashInterface, ProcessUserInvite } from "types/user-invite.interface";
 import Module from "modules/module";
 import { CreatedUser } from "types/user.interface";
 
