@@ -27,22 +27,11 @@
   },
   "name": "@kanvas/client-js",
   "author": "Rogelio Morey",
-  "size-limit": [
-    {
-      "path": "dist/client-js.cjs.production.min.js",
-      "limit": "10 KB"
-    },
-    {
-      "path": "dist/client-js.esm.js",
-      "limit": "10 KB"
-    }
-  ],
   "devDependencies": {
     "@size-limit/preset-small-lib": "^5.0.1",
     "esbuild": "^0.14.34",
     "husky": "^7.0.0",
     "lint-staged": "^11.0.0",
-    "size-limit": "^5.0.1",
     "ts-node": "^10.0.0",
     "ts-patch": "^1.3.4",
     "tsdx": "^0.14.1",
