@@ -4,7 +4,7 @@ import { FormatedResponse } from "types/formated-response.interface";
 import { NotificationInterface } from "types/notification.interface";
 import { DEFAULT_PAGINATION_ARGUMENT, PaginationArgument } from "types/pagination-argument";
 
-export class Notifications extends Base {
+export default class Notifications extends Base {
   constructor(http: HttpClient) {
     super(http, 'notifications');
   }

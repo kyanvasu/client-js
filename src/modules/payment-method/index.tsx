@@ -2,7 +2,7 @@ import HttpClient from "core/http-client";
 import Base from "modules/base";
 import { PaymentMethodInterface } from "types/apps-plan.interface";
 
-export class PaymentMethod extends Base {
+export default class PaymentMethod extends Base {
   constructor(http: HttpClient) {
     super(http, 'apps-plans');
   }
