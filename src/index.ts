@@ -1,20 +1,12 @@
-import TokenProvider from 'core/token-provider';
-import HttpClient from 'core/http-client';
-import Auth from 'modules/auth';
-import ClientOptions from 'types/client-options';
-import Application from 'modules/application';
-import Users from 'modules/users';
-import Companies from 'modules/companies';
-import FileSystem from 'modules/filesystem';
-import Roles from 'modules/roles';
-import UserInvite from 'modules/users-invite';
-import CompaniesBranches from 'modules/companies-branches';
-import UserNotifications from 'modules/user-notifications';
-import { Notifications } from 'modules/notifications';
-import Subscription from 'modules/subscription';
+import { HttpClient, TokenProvider } from './core';
+import { Application, Auth, Companies, Users, FileSystem, Roles, UserInvite, CompaniesBranches, UserNotifications, Notifications, Subscription } from './modules';
+import { ClientOptions } from './types';
 
 // Export interface and types definitions.
-export * from './types/';
+export * from './types';
+export * from './core';
+export * from './modules';
+export * from './errors';
 
 export default class KanvasSDK {
   public readonly http: HttpClient;
