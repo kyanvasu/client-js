@@ -2,6 +2,8 @@ import { File } from 'types/file.interface';
 
 export interface CompanyInterface {
   id: number;
+  uuid: string;
+  name: string;
   users_id: number;
   has_activities: number;
   appPlanId: number;
@@ -14,7 +16,6 @@ export interface CompanyInterface {
   created_at: string;
   updated_at: string;
   is_deleted: number;
-  name: string;
   profile_image: string;
   website: string;
   address: string;
