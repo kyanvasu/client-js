@@ -20,5 +20,5 @@ export interface CreateUserConfirmation {
   lastname: string;
   email: string;
   description: string;
-  roles_id: number;
+  role_id: number;
 }

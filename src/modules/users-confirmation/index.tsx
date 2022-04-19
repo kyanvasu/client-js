@@ -1,6 +1,6 @@
 import HttpClient from "core/http-client";
 import Base from "modules/base";
-import { UserInterface } from "types/user.interface";
+import { CreatedUser, UserInterface } from "types/user.interface";
 import { CreateUserConfirmation, UserValidate } from "types/users-confirmation.interface";
 
 export default class UsersConfirmation extends Base {
@@ -44,12 +44,12 @@ export default class UsersConfirmation extends Base {
    * @returns {Promise<UserInterface>} current user data
    */
   async confirm(activationKey: string, password: string): Promise<UserInterface> {
-    const result = await this.http.request<UserInterface>({
+    const { data } = await this.http.request<CreatedUser>({
       method: 'POST',
       url: `${this.baseUrl}/${activationKey}`,
       data: { password }
     });
 
-    return result.data;
+    return data.user;
   }
 }
