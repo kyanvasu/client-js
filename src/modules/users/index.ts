@@ -83,6 +83,11 @@ export default class Users extends Module<UserInterface, CreateUserParams> {
     return data;
   }
 
+  /**
+   * @description Creates a delete account request into backend, normaly it takes 30 days to fully delete the account.
+   * @param {number} id - User's identification
+   * @returns {Promise<UserInterface>} - User's current data
+   */
   async requestDeleteAccount(id: number): Promise<UserInterface> {
     const { data } = await this.http.request<UserInterface>({
       method: 'POST',
@@ -92,6 +97,11 @@ export default class Users extends Module<UserInterface, CreateUserParams> {
     return data;
   }
 
+  /**
+   * @description Removes a previously created delete account request.
+   * @param {number} id - User's identification
+   * @returns {Promise<UserInterface>} - User's current data
+   */
   async removeRequestDeleteAccount(id: number): Promise<UserInterface> {
     const { data } = await this.http.request<UserInterface>({
       method: 'DELETE',

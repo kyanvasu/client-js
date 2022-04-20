@@ -64,6 +64,8 @@ export interface UserInterface {
   states: string;
   intro?: string;
   manager_id?: string;
+  user_activation_key: string;
+  user_activation_forgot: boolean | null;
 }
 
 export interface CreateUserParams extends Pick<UserInterface, 'email'> {

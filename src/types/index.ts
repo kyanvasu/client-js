@@ -15,3 +15,4 @@ export { UserNotificationInterface } from './user-notifications.interface';
 export { CompaniesBranchesInterface, CreateCompaniesBranchesInterface } from './companies-branches.interface';
 export { SubscriptionInterface as AppsPlanInterface, PaymentMethodInterface } from './apps-plan.interface'
 export { NotificationInterface } from './notification.interface';
+export { CreateUserConfirmation, UserValidate } from './users-confirmation.interface';
