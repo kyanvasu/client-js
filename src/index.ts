@@ -1,5 +1,19 @@
 import { HttpClient, TokenProvider } from './core';
-import { Application, Auth, Companies, Users, FileSystem, Roles, UserInvite, CompaniesBranches, UserNotifications, Notifications, Subscription, UsersConfirmation } from './modules';
+import {
+  Application,
+  Auth,
+  Companies,
+  Users,
+  FileSystem,
+  Roles,
+  UserInvite,
+  CompaniesBranches,
+  UserNotifications,
+  Notifications,
+  AppsPlans,
+  Subscriptions,
+  UsersConfirmation
+} from './modules';
 import { ClientOptions } from './types';
 
 // Export interface and types definitions.
@@ -21,7 +35,8 @@ export default class KanvasSDK {
   public readonly companiesBranches: CompaniesBranches;
   public readonly userNotifications: UserNotifications;
   public readonly notifications: Notifications;
-  public readonly subscription: Subscription;
+  public readonly appsPlans: AppsPlans;
+  public readonly subscriptions: Subscriptions;
   public readonly usersConfirmation: UsersConfirmation;
 
   constructor(options: ClientOptions) {
@@ -37,7 +52,8 @@ export default class KanvasSDK {
     this.companiesBranches = new CompaniesBranches(this.http);
     this.userNotifications = new UserNotifications(this.http);
     this.notifications = new Notifications(this.http);
-    this.subscription = new Subscription(this.http);
+    this.appsPlans = new AppsPlans(this.http);
+    this.subscriptions = new Subscriptions(this.http);
     this.usersConfirmation = new UsersConfirmation(this.http);
   }
 }

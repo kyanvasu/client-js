@@ -1,6 +1,6 @@
 import HttpClient from "core/http-client";
 import Base from "modules/base";
-import { PaymentMethodInterface } from "types/apps-plan.interface";
+import { PaymentMethodInterface } from "types/subscriptions.interface";
 
 export default class PaymentMethod extends Base {
   constructor(http: HttpClient) {
