@@ -47,7 +47,7 @@ export default class Subscription extends Base {
   async reactivate(subscriptionId: number): Promise<SubscriptionsInterface> {
     const { data } = await this.http.request<SubscriptionsInterface>({
       method: 'POST',
-      url: `${this.baseUrl}/${subscriptionId}`
+      url: `${this.baseUrl}/${subscriptionId}/reactivate`
     });
 
     return data;

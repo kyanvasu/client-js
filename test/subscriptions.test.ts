@@ -1,50 +1,70 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import Config from '../env';
 import KanvasSDK from '../src/index';
+import { SubscriptionsInterface } from '../src/types/subscriptions.interface';
 const client = new KanvasSDK(Config);
 
 const email = 'demo@dealerappcenter.com';
 const password = 'nosenose';
+const paymentMethod = {
+    'card_number' : '4242424242424242',
+    'card_exp_month': 12,
+    'card_exp_year' : 2024,
+    'card_cvc' : 333
+};
+const plans = ['monthly-10-1', 'yearly-10-1'];
+let subscription: SubscriptionsInterface;
 
-// let subscriptions: SubscriptionInterface[];
-// let company: CompanyInterface;
-
-describe('Perform Subscription  module Test', () => {
+describe('Perform Subscription module Test', () => {
   beforeAll(async () => {
     await client.auth.login(email, password);
-    // company = await client.companies.getById(104, { relationships: 'subscription' });
-  });
-  
-  test('should get all subscriptions', async () => {
-    const data = await client.subscription.get();
-    // subscriptions = data;
-    expect(data.length).toBeGreaterThanOrEqual(1);
   });
 
-  test('should get all filtered subscriptions', async () => {
-    const { data } = await client.subscription.get({
-      format: true,
-      q: '(is_deleted:0)',
-      sort: 'created_at|DESC'
+  describe('Testing fetching subscriptions', () => {
+    test('Test get subscriptions plain list', async () => {
+      const subscriptionsList = await client.subscriptions.get();
+      expect(subscriptionsList).toBeInstanceOf(Array);
+      const [ sub ] = subscriptionsList;
+      subscription = sub;
+      expect(sub.id).toBeDefined();
     });
-
-    expect(data.length).toBeGreaterThanOrEqual(1);
+    test('Test get subscriptions paginated list', async () => {
+      const paginatedSubscriptions = await client.subscriptions.get({ format: true });
+      const { data: subscriptionsList } = paginatedSubscriptions;
+      expect(paginatedSubscriptions.page).toBe(1);
+      expect(subscriptionsList.length).toBeGreaterThanOrEqual(0);
+    });
   });
 
-  // bastacio: current test are commented because backend service is failling 
-  // test('should update the current subscription', async () => {
-  //   const plans = subscriptions.filter((plan) => plan.stripe_plan !== company?.subscription?.stripe_plan)
-  //   const { stripe_plan, stripe_id, payment_style }: SubscriptionInterface = plans[0];
-  //   await client.subscription.update(stripe_plan, {
-  //     stripe_id,
-  //     payment_style,
-  //     stripe_plan
-  //   });
-  //   expect(true).toBeTruthy();
-  // });
+  describe('Testing update payment method', () => {
+    test('Test update payment method', async () => {
+      const sub = await client.subscriptions.updatePaymentMethod(Number(subscription.id), paymentMethod);
+      expect(sub.id).toBe(subscription.id);
+    });
+  });
 
-  // test('should remove the current subscription', async () => {
-  //   await client.subscription.delete(company?.subscription?.stripe_plan)
-  //   expect(true).toBeTruthy();
-  // });
+  describe('Testing change plan method', () => {
+    test('Test change plan method', async () => {
+      const newPlan = plans.filter((plan) => plan !== subscription.name)[0];
+      const sub = await client.subscriptions.changePlan(Number(subscription.id), newPlan);
+      expect(sub.id).toBe(subscription.id);
+      expect(sub.name).toBe(newPlan);
+    });
+  });
+
+  describe('Testing cancel subscription', () => {
+    test('Test cancel subscription', async () => {
+      const sub = await client.subscriptions.cancel(Number(subscription.id));
+      expect(sub.id).toBe(subscription.id);
+      expect(sub.is_cancelled).toBe(1);
+    });
+  });
+
+  describe('Testing reactiate subscription', () => {
+    test('Test reactiate subscription', async () => {
+      const sub = await client.subscriptions.reactivate(Number(subscription.id));
+      expect(sub.id).toBe(subscription.id);
+      expect(sub.is_cancelled).toBe(0);
+    });
+  });
 });
