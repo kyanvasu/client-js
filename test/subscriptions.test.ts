@@ -9,7 +9,7 @@ const password = 'nosenose';
 const paymentMethod = {
     'card_number' : '4242424242424242',
     'card_exp_month': 12,
-    'card_exp_year' : 2024,
+    'card_exp_year' : new Date().getFullYear() + 1,
     'card_cvc' : 333
 };
 const plans = ['monthly-10-1', 'yearly-10-1'];
