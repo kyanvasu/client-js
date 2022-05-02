@@ -8,10 +8,6 @@ export default interface ClientOptions {
    */
   baseUrl: string;
   /**
-   * Set the public key for Stripe queries.
-   */
-  stripePublicKey: string;
-  /**
    * Append additional headers to all requests.
    */
   headers?: Record<string, string>;

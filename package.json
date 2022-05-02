@@ -40,7 +40,6 @@
     "typescript-transform-paths": "^3.3.1"
   },
   "dependencies": {
-    "@stripe/stripe-js": "^1.29.0",
     "axios": "^0.21.1",
     "axios-auth-refresh": "^3.1.0",
     "qs": "^6.10.1",
