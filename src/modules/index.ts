@@ -1,5 +1,5 @@
-export { default as Module } from './module'
 export { default as Base } from './base'
+export { default as Module } from './module'
 export { default as UserInvite } from './users-invite'
 export { default as Users } from './users'
 export { default as UserNotifications } from './user-notifications'

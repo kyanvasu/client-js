@@ -1,6 +1,6 @@
 import HttpClient from 'core/http-client';
 import { FormatedResponse } from 'types/formated-response.interface';
-import { DEFAULT_PAGINATION_ARGUMENT, PaginationArgument } from 'types/pagination-argument';
+import { DEFAULT_PAGINATION_ARGUMENT, SearchPaginationArgument } from 'types/pagination-argument';
 
 export default class Base {
   protected readonly http: HttpClient;
@@ -16,10 +16,10 @@ export default class Base {
   }
 
   protected async gettable<D>(url: string): Promise<D[]>;
-  protected async gettable<D>(url: string, pagination: PaginationArgument): Promise<FormatedResponse<D>>;
-  protected async gettable<D>(url: string, pagination: PaginationArgument = DEFAULT_PAGINATION_ARGUMENT): Promise<D[] | FormatedResponse<D>> {
-    const { page, limit, sort, format = false, q, relationships } = pagination;
-    const params = { page, limit, sort, format, q, relationships };
+  protected async gettable<D>(url: string, pagination: SearchPaginationArgument): Promise<FormatedResponse<D>>;
+  protected async gettable<D>(url: string, pagination: SearchPaginationArgument = DEFAULT_PAGINATION_ARGUMENT): Promise<D[] | FormatedResponse<D>> {
+    const { page, limit, sort, format = false, q, relationships, text } = pagination;
+    const params = { page, limit, format, sort, q, relationships, text };
 
     if (format) {
       const { data } = await this.http.request<FormatedResponse<D>>({
@@ -34,6 +34,7 @@ export default class Base {
       method: 'GET',
       url,
     });
+    
     return data;
   }
 }

@@ -1,7 +1,7 @@
 import Base from './base';
 import HttpClient from 'core/http-client';
 import { FormatedResponse } from 'types/formated-response.interface';
-import { DEFAULT_PAGINATION_ARGUMENT, FindPaginationArgument, PaginationArgument } from 'types/pagination-argument';
+import { DEFAULT_PAGINATION_ARGUMENT, FindPaginationArgument, PaginationArgument, SearchPaginationArgument } from 'types/pagination-argument';
 import { AttachFile, File } from 'types/file.interface';
 
 export default class Module<T, K = void> extends Base {
@@ -128,4 +128,14 @@ export default class Module<T, K = void> extends Base {
 
     return data;
   }
+
+   /**
+    * @description Get a list of generic type using pagination argument
+    * @param {SearchPaginationArgument} pagination 
+    * @returns {Promise<FormatedResponse<T>>}
+    */
+   async search(pagination: SearchPaginationArgument): Promise<FormatedResponse<T>>;
+   async search(pagination: SearchPaginationArgument = DEFAULT_PAGINATION_ARGUMENT): Promise<T[] | FormatedResponse<T>> {
+    return this.gettable<T>(`/search${this.baseUrl}`, pagination);
+  } 
 }
