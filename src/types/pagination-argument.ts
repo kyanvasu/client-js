@@ -10,8 +10,12 @@ export interface PaginationArgument {
   format?: boolean;
   q?: string;
   relationships?: string;
+  text?: string;
 }
 
+export interface SearchPaginationArgument extends PaginationArgument {
+  text?: string;
+}
 export interface FindPaginationArgument {
   relationships?: string;
 }

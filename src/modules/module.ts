@@ -1,7 +1,7 @@
 import Base from './base';
 import HttpClient from 'core/http-client';
 import { FormatedResponse } from 'types/formated-response.interface';
-import { DEFAULT_PAGINATION_ARGUMENT, FindPaginationArgument, PaginationArgument } from 'types/pagination-argument';
+import { DEFAULT_PAGINATION_ARGUMENT, FindPaginationArgument, PaginationArgument, SearchPaginationArgument } from 'types/pagination-argument';
 import { AttachFile, File } from 'types/file.interface';
 
 export default class Module<T, K = void> extends Base {
@@ -129,25 +129,13 @@ export default class Module<T, K = void> extends Base {
     return data;
   }
 
-  protected async gettable<D>(url: string): Promise<D[]>;
-  protected async gettable<D>(url: string, pagination: PaginationArgument): Promise<FormatedResponse<D>>;
-  protected async gettable<D>(url: string, pagination: PaginationArgument = DEFAULT_PAGINATION_ARGUMENT): Promise<D[] | FormatedResponse<D>> {
-    const { page, limit, sort, format = false, q, relationships } = pagination;
-    const params = { page, limit, sort, format, q, relationships };
-
-    if (format) {
-      const { data } = await this.http.request<FormatedResponse<D>>({
-        method: 'GET',
-        url,
-        params,
-      });
-      return data;
-    }
-
-    const { data } = await this.http.request<D[]>({
-      method: 'GET',
-      url,
-    });
-    return data;
-  }
+   /**
+    * @description Get a list of generic type using pagination argument
+    * @param {SearchPaginationArgument} pagination 
+    * @returns {Promise<FormatedResponse<T>>}
+    */
+   async search(pagination: SearchPaginationArgument): Promise<FormatedResponse<T>>;
+   async search(pagination: SearchPaginationArgument = DEFAULT_PAGINATION_ARGUMENT): Promise<T[] | FormatedResponse<T>> {
+    return this.gettable<T>(`/search${this.baseUrl}`, pagination);
+  } 
 }

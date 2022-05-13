@@ -64,7 +64,7 @@ describe('Performs Users module Test', () => {
     test('User can be updated', async() => {
       const lastname = 'SDK CLIENT';
       const displayname = 'kvsClientSDK';
-      expect(createdUser.lastname).toEqual(' ');
+      expect(createdUser.lastname).toBeNull();
       const updatedUser = await client.users.update(createdUser.id, { ...createdUser, lastname, displayname })
       expect(updatedUser.lastname).toEqual(lastname);
       expect(updatedUser.displayname).toEqual(displayname);
@@ -93,6 +93,14 @@ describe('Performs Users module Test', () => {
     
       expect(response.page).toBe(1);
       expect(data.length).toBeGreaterThanOrEqual(0);
+    })
+
+    test('Search users by given word', async () => {
+      const response = await client.users.search({ text: 'demo', format: true });
+      const { data } = response;
+    
+      expect(data).toBeInstanceOf(Array);
+      expect(data.length).toBeGreaterThanOrEqual(1);
     })
   })
 
