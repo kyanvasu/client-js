@@ -17,3 +17,4 @@ export { AppsPlansInterface } from './apps-plans.interface'
 export { SubscriptionsInterface, PaymentMethodInterface } from './subscriptions.interface'
 export { NotificationInterface } from './notification.interface';
 export { CreateUserConfirmation, UserValidate } from './users-confirmation.interface';
+export { CurrencyInterface } from './currencies.interface';
