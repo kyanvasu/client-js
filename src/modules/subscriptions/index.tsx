@@ -1,6 +1,6 @@
 import HttpClient from "core/http-client";
 import Base from "modules/base";
-import { SubscriptionsInterface, PaymentMethodInterface } from "types/subscriptions.interface";
+import { SubscriptionsInterface, PaymentMethodInterface, UpdatePaymentMethodInterface, PaymentHistoryInterface } from "types/subscriptions.interface";
 import { FormatedResponse } from "types/formated-response.interface";
 import { DEFAULT_PAGINATION_ARGUMENT, PaginationArgument } from "types/pagination-argument";
 
@@ -68,12 +68,25 @@ export default class Subscription extends Base {
   }
 
   /**
+   * @description Get a subscriptions payment method data.
+   * @param {number} subscriptionId 
+   * @returns {PaymentMethodInterface}
+   */
+  async getPaymentMethod(subscriptionId: number): Promise<PaymentMethodInterface> {
+    const { data } = await this.http.request<PaymentMethodInterface>({
+      url: `${this.baseUrl}/${subscriptionId}/payment-method`,
+    });
+
+    return data;
+  }
+
+  /**
    * @description Update the subscription payment method.
    * @param {number} subscriptionId
-   * @param {PaymentMethodInterface} params
+   * @param {UpdatePaymentMethodInterface} params
    * @returns {SubscriptionsInterface}
    */
-  async updatePaymentMethod(subscriptionId: number, params: PaymentMethodInterface): Promise<SubscriptionsInterface> {
+  async updatePaymentMethod(subscriptionId: number, params: UpdatePaymentMethodInterface): Promise<SubscriptionsInterface> {
     const { data } = await this.http.request<SubscriptionsInterface>({
       method: 'PUT',
       url: `${this.baseUrl}/${subscriptionId}/payment-method`,
@@ -96,6 +109,19 @@ export default class Subscription extends Base {
       data: {
         "stripe_id": planName
       },
+    });
+
+    return data;
+  }
+
+  /**
+   * @description Get a subscription's payment history.
+   * @param {number} subscriptionId 
+   * @returns {PaymentHistoryInterface[]}
+   */
+  async paymentHistory(subscriptionId: number): Promise<PaymentHistoryInterface[]> {
+    const { data } = await this.http.request<PaymentHistoryInterface[]>({
+      url: `${this.baseUrl}/${subscriptionId}/payment-history`,
     });
 
     return data;
