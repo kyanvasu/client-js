@@ -28,8 +28,25 @@ export interface SubscriptionsInterface {
 }
 
 export interface PaymentMethodInterface {
+    brand: string;
+    exp_month: number;
+    exp_year: number;
+    last4: string | number;
+}
+
+export interface UpdatePaymentMethodInterface {
   card_number: string;
   card_exp_month: number;
   card_exp_year: number;
   card_cvc: number;
+}
+
+export interface PaymentHistoryInterface {
+  id: string;
+  object: string;
+  amount_paid: number;
+  billing_reason: string;
+  collection_method: string;
+  created: number;
+  currency: string;
 }
