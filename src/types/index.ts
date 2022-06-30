@@ -14,7 +14,7 @@ export { CompanyInterface, CreateCompanyParams } from './companies.interface'
 export { UserNotificationInterface } from './user-notifications.interface';
 export { CompaniesBranchesInterface, CreateCompaniesBranchesInterface } from './companies-branches.interface';
 export { AppsPlansInterface } from './apps-plans.interface'
-export { SubscriptionsInterface, PaymentMethodInterface } from './subscriptions.interface'
+export { SubscriptionsInterface, PaymentMethodInterface, UpdatePaymentMethodInterface, PaymentHistoryInterface } from './subscriptions.interface'
 export { NotificationInterface } from './notification.interface';
 export { CreateUserConfirmation, UserValidate } from './users-confirmation.interface';
 export { CurrencyInterface } from './currencies.interface';
