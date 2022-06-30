@@ -35,10 +35,11 @@ export interface PaymentMethodInterface {
 }
 
 export interface UpdatePaymentMethodInterface {
-  card_number: string;
-  card_exp_month: number;
-  card_exp_year: number;
-  card_cvc: number;
+  card_number?: string;
+  card_exp_month?: number;
+  card_exp_year?: number;
+  card_cvc?: number;
+  card_token?: string;
 }
 
 export interface PaymentHistoryInterface {
@@ -49,4 +50,10 @@ export interface PaymentHistoryInterface {
   collection_method: string;
   created: number;
   currency: string;
+  paid: boolean;
+  lines: {
+    data: [{
+      description: string;
+    }],
+  };
 }
