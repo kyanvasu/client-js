@@ -42,6 +42,10 @@ export interface UpdatePaymentMethodInterface {
   card_token?: string;
 }
 
+interface PaymentHistoryLinesData {
+  description: string;
+}
+
 export interface PaymentHistoryInterface {
   id: string;
   object: string;
@@ -52,8 +56,6 @@ export interface PaymentHistoryInterface {
   currency: string;
   paid: boolean;
   lines: {
-    data: [{
-      description: string;
-    }],
+    data: PaymentHistoryLinesData[];
   };
 }
