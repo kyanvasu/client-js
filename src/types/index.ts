@@ -7,7 +7,7 @@ export { Location as Location } from './location.interface';
 export { default as LoginResponse } from './login-response.interface';
 export { PaginationArgument, FindPaginationArgument, DEFAULT_PAGINATION_ARGUMENT } from './pagination-argument';
 export { default as KanvasStorage } from './storage.interface';
-export { UserInterface, CreateUserParams, CreatedUser } from './user.interface';
+export { UserInterface, CreateUserParams, CreatedUser, SocialLinkInterface } from './user.interface';
 export { RoleInterface } from './role.interface'
 export { CreateUserInvite, UserInviteInterface, UserInviteHashInterface, ProcessUserInvite } from './user-invite.interface'
 export { CompanyInterface, CreateCompanyParams } from './companies.interface'

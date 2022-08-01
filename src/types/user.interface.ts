@@ -3,6 +3,11 @@ import { File } from 'types/file.interface';
 import { Location } from 'types/location.interface';
 import { RoleInterface } from './role.interface';
 
+export interface SocialLinkInterface {
+  type: string;
+  url: string;
+}
+
 export interface UserInterface {
   id: number;
   uuid: string;
@@ -66,6 +71,7 @@ export interface UserInterface {
   manager_id?: string;
   user_activation_key: string;
   user_activation_forgot: boolean | null;
+  social_links: SocialLinkInterface[];
 }
 
 export interface CreateUserParams extends Pick<UserInterface, 'email'> {
