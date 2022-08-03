@@ -23,6 +23,7 @@ export interface UserInterface {
   displayname: string;
   dob: string;
   email: string;
+  contact_email: string;
   firstname: string;
   description: string;
   interest: string;
