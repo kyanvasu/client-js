@@ -1,5 +1,5 @@
 {
-  "version": "0.11.5",
+  "version": "0.12.0",
   "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "tsdx watch",
-    "build": "npm run test && rm -rf dist && node build.js && tsc --emitDeclarationOnly",
+    "build": "rm -rf dist && node build.js && tsc --emitDeclarationOnly",
     "test": "tsdx test",
     "lint": "eslint",
     "size": "size-limit",

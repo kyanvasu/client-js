@@ -20,3 +20,9 @@ build({
   outfile: 'dist/index.esm.js',
   format: 'esm',
 })
+
+build({
+  ...shared,
+  outfile: 'dist/index.cjs.js',
+  format: 'cjs',
+})
