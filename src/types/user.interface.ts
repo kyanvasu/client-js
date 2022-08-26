@@ -33,6 +33,7 @@ export interface UserInterface {
   lastvisit: string;
   last_visit: string;
   location: Location;
+  phone: string;
   phone_number: string;
   profile_header: string;
   profile_header_mobile: string;
