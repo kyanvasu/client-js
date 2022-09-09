@@ -1,4 +1,4 @@
-export { default as AuthenticationError } from './authentication'
+export * from './authentication'
 
 export enum HttpErrors {
   Unauthorized = 401,

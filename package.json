@@ -2,7 +2,7 @@
   "version": "0.12.0",
   "license": "MIT",
   "main": "dist/index.js",
-  "module": "dist/index.esm.js",
+  "module": "dist/client-js.esm.js",
   "typings": "dist/index.d.ts",
   "files": [
     "dist"
@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "tsdx watch",
-    "build": "rm -rf dist && node build.js && tsc --emitDeclarationOnly",
+    "build": "rm -rf dist && tsdx build",
     "test": "tsdx test",
     "lint": "eslint",
     "size": "size-limit",
@@ -29,7 +29,7 @@
   "author": "Rogelio Morey",
   "devDependencies": {
     "@size-limit/preset-small-lib": "^5.0.1",
-    "esbuild": "^0.14.34",
+    "babel-plugin-module-resolver": "^4.1.0",
     "husky": "^7.0.0",
     "lint-staged": "^11.0.0",
     "ts-node": "^10.0.0",
