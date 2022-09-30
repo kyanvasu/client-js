@@ -15,6 +15,7 @@ export interface PaginationArgument {
 
 export interface SearchPaginationArgument extends PaginationArgument {
   text?: string;
+  filters?: string;
 }
 export interface FindPaginationArgument {
   relationships?: string;
